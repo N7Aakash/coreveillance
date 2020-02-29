@@ -11,7 +11,7 @@ class Database{
         $this->username = "root";
         $this->password = "";
         //
-        $this->database = "core";
+        $this->database = "nativephpsample";
         $this->connectDB();
     }
 

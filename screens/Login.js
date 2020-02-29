@@ -93,7 +93,23 @@ class Login extends React.Component {
                                         behavior="padding"
                                         enabled
                                     >
-
+                                        <Block width={width * 0.8} >
+                                            <Input
+                                                borderless
+                                                placeholder="Flat Number"
+                                                onChangeText={flat => this.setState({UserFlat : flat})}
+                                                iconContent={
+                                                    <Icon
+                                                        size={16}
+                                                        color={argonTheme.COLORS.ICON}
+                                                        name="ic_mail_24px"
+                                                        family="ArgonExtra"
+                                                        style={styles.inputIcons}
+                                                    />
+                                                }
+                                            />
+                                        </Block>
+<Block middle style={{marginTop:theme.SIZES.BASE,marginBottom:theme.SIZES.BASE}}><Text style={{color:'white',fontWeight: 'bold'}}>OR</Text></Block>
                                         <Block width={width * 0.8} style={{ marginBottom: 30 }}>
                                             <Input
                                                 borderless
@@ -162,7 +178,8 @@ const styles = StyleSheet.create({
     registerContainer: {
         width: width * 0.9,
         height: height * 0.58,
-        backgroundColor: "#F4F5F7",
+            // backgroundColor: "#F4F5F7",
+        backgroundColor: 'rgba(52, 52, 52, 0.8)',
         borderRadius: 4,
         shadowColor: argonTheme.COLORS.BLACK,
         shadowOffset: {
@@ -172,31 +189,14 @@ const styles = StyleSheet.create({
         shadowRadius: 8,
         shadowOpacity: 0.1,
         elevation: 1,
-        overflow: "hidden"
+        overflow: "hidden",
+        marginBottom:120
     },
     logo:{
         height:109,
         width:100,
         marginTop: 50,
 
-    },
-    socialConnect: {
-        backgroundColor: argonTheme.COLORS.WHITE,
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: "#8898AA"
-    },
-    socialButtons: {
-        width: 120,
-        height: 40,
-        backgroundColor: "#fff",
-        shadowColor: argonTheme.COLORS.BLACK,
-        shadowOffset: {
-            width: 0,
-            height: 4
-        },
-        shadowRadius: 8,
-        shadowOpacity: 0.1,
-        elevation: 1
     },
     createText:{
         marginLeft: 20,

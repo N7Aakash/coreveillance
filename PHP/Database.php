@@ -10,7 +10,8 @@ class Database{
         $this->host = "localhost";
         $this->username = "Dhiren Chotwani";
         $this->password = "Activa9015";
-        $this->database = "nativephpsample";
+        //
+        $this->database = "core";
         $this->connectDB();
     }
 

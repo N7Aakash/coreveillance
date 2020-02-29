@@ -23,6 +23,7 @@ import DrawerItem from "../components/DrawerItem";
 // header for screens
 import Header from "../components/Header";
 import Register from "../screens/Register";
+import Privacy from "../screens/Privacy";
 
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
   transitionSpec: {
@@ -141,13 +142,19 @@ const AccountStack = createStackNavigator(
           headerTransparent: true
         })
       },
-      Register:{
+      Register: {
         screen: Register,
-        navigationOptions: ({ navigation }) => ({
+        navigationOptions: ({navigation}) => ({
           headerTransparent: true
         })
-      }
-    },
+      },
+    Privacy:{
+  screen: Privacy,
+      navigationOptions: ({ navigation }) => ({
+    headerTransparent: true
+  })
+}
+},
     {
       cardStyle: { backgroundColor: "#FFFFFF" },
       transitionConfig

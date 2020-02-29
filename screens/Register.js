@@ -29,7 +29,9 @@ class Register extends React.Component {
 
         }
     }
-
+    openPrivacy=()=>{
+      this.props.navigation.navigate("Privacy");
+    };
     registerUser = (title, message) =>{
         console.log(this.state.UserEmail);
         console.log(this.state.UserPassword);
@@ -265,7 +267,7 @@ class Register extends React.Component {
                                             />
                                             <Button
                                                 style={{ width: 155, backgroundColor:'rgba(55, 55, 55, 1.5)', paddingHorizontal:25, marginLeft:5 }}
-
+                                                onPress={this.openPrivacy}
                                                 color="transparent"
                                                 textStyle={{
                                                     color:'red',

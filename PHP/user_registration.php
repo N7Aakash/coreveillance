@@ -10,11 +10,13 @@ $json = file_get_contents('php://input');
 
 $obj = json_decode($json, true);
 
-$name = $obj['name'];
-
+$f_name = $obj['f_name'];
+$l_name = $obj['f_name'];
 $email = $obj['email'];
-
-$password = $obj['password'];
+$password = password_hash($obj['password'],PASSWORD_BCRYPT);
+$wing = $obj['wing'];
+$flat_no = $obj['flat_no'];
+$phone_number = $obj['phone_number'];
 
 //echo $email;
 
@@ -36,7 +38,7 @@ if (isset($check)) {
 } else {
 
 
-    $Sql_Query = "insert into users (user_name,user_email,user_password) values ('$name','$email','$password')";
+    $Sql_Query = "insert into users (f_name,l_name,email,password,wing,flat_no,phone_number) values ('$f_name','$l_name','$email','$password','$wing','$flat_no','$phone_number')";
 
 
     if (mysqli_query($con, $Sql_Query)) {

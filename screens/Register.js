@@ -76,36 +76,26 @@ class Register extends React.Component {
                     source={Images.RegisterBackground}
                     style={{ width, height, zIndex: 1 }}
                 >
+
                     <Block flex middle>
                         <Block style={styles.registerContainer}>
+                            <ScrollView>
+
                             <Block flex={0.25} middle style={styles.socialConnect}>
-                                <Text color="#8898AA" size={12}>
+                                <Text color="#8898AA" size={12} style={{marginTop: theme.SIZES.BASE}}>
                                     Sign up with
                                 </Text>
-                                <Block row style={{ marginTop: theme.SIZES.BASE }}>
+                                <Block row style={{ marginTop: theme.SIZES.BASE , marginBottom:theme.SIZES.BASE}}>
 
                                     <Button style={{ ...styles.socialButtons, marginRight: 30 }}>
-                                        <Block row>
-                                            <Icon
-                                                name="logo-github"
-                                                family="Ionicon"
-                                                size={14}
-                                                color={"black"}
-                                                style={{ marginTop: 2, marginRight: 5 }}
-                                            />
-                                            <Text style={styles.socialTextButtons}>hi</Text>
+                                        <Block middle row>
+                                            <Image source={Images.github}  />
                                         </Block>
                                     </Button>
                                     <Button style={styles.socialButtons}>
-                                        <Block row>
-                                            <Icon
-                                                name="logo-google"
-                                                family="Ionicon"
-                                                size={14}
-                                                color={"black"}
-                                                style={{ marginTop: 2, marginRight: 5 }}
-                                            />
-                                            <Text style={styles.socialTextButtons}>GOOGLE</Text>
+                                        <Block row middle>
+                                            <Image source={Images.google}  />
+
                                         </Block>
                                     </Button>
                                 </Block>
@@ -114,7 +104,7 @@ class Register extends React.Component {
                             <Block flex>
 
                                 <Block flex={0.17} middle>
-                                    <Text color="#8898AA" size={12}>
+                                    <Text color="#8898AA" size={12} style={{ marginTop: theme.SIZES.BASE , marginBottom:theme.SIZES.BASE}}>
                                         Or sign up the classic way
                                     </Text>
                                 </Block>
@@ -157,6 +147,86 @@ class Register extends React.Component {
                                                 }
                                             />
                                         </Block>
+                                        <Block width={width * 0.8} style={{ marginBottom: 15 }}>
+                                            <Input
+                                                borderless
+                                                placeholder="Email"
+                                                onChangeText={email => this.setState({UserEmail : email})}
+                                                iconContent={
+                                                    <Icon
+                                                        size={16}
+                                                        color={argonTheme.COLORS.ICON}
+                                                        name="ic_mail_24px"
+                                                        family="ArgonExtra"
+                                                        style={styles.inputIcons}
+                                                    />
+                                                }
+                                            />
+                                        </Block>
+                                        <Block width={width * 0.8} style={{ marginBottom: 15 }}>
+                                            <Input
+                                                borderless
+                                                placeholder="Email"
+                                                onChangeText={email => this.setState({UserEmail : email})}
+                                                iconContent={
+                                                    <Icon
+                                                        size={16}
+                                                        color={argonTheme.COLORS.ICON}
+                                                        name="ic_mail_24px"
+                                                        family="ArgonExtra"
+                                                        style={styles.inputIcons}
+                                                    />
+                                                }
+                                            />
+                                        </Block>
+                                        <Block width={width * 0.8} style={{ marginBottom: 15 }}>
+                                            <Input
+                                                borderless
+                                                placeholder="Email"
+                                                onChangeText={email => this.setState({UserEmail : email})}
+                                                iconContent={
+                                                    <Icon
+                                                        size={16}
+                                                        color={argonTheme.COLORS.ICON}
+                                                        name="ic_mail_24px"
+                                                        family="ArgonExtra"
+                                                        style={styles.inputIcons}
+                                                    />
+                                                }
+                                            />
+                                        </Block>
+                                        <Block width={width * 0.8} style={{ marginBottom: 15 }}>
+                                            <Input
+                                                borderless
+                                                placeholder="Email"
+                                                onChangeText={email => this.setState({UserEmail : email})}
+                                                iconContent={
+                                                    <Icon
+                                                        size={16}
+                                                        color={argonTheme.COLORS.ICON}
+                                                        name="ic_mail_24px"
+                                                        family="ArgonExtra"
+                                                        style={styles.inputIcons}
+                                                    />
+                                                }
+                                            />
+                                        </Block>
+                                        <Block width={width * 0.8} style={{ marginBottom: 15 }}>
+                                            <Input
+                                                borderless
+                                                placeholder="Email"
+                                                onChangeText={email => this.setState({UserEmail : email})}
+                                                iconContent={
+                                                    <Icon
+                                                        size={16}
+                                                        color={argonTheme.COLORS.ICON}
+                                                        name="ic_mail_24px"
+                                                        family="ArgonExtra"
+                                                        style={styles.inputIcons}
+                                                    />
+                                                }
+                                            />
+                                        </Block>
                                         <Block width={width * 0.8}>
                                             <Input
                                                 password
@@ -177,7 +247,7 @@ class Register extends React.Component {
                                                 <Text size={12} color={argonTheme.COLORS.MUTED}>
                                                     password strength:
                                                 </Text>
-                                                <Text bold size={12} color={argonTheme.COLORS.SUCCESS}>
+                                                <Text bold size={12} color='red'>
                                                     {" "}
                                                     strong
                                                 </Text>
@@ -189,35 +259,40 @@ class Register extends React.Component {
                                                 checkboxStyle={{
                                                     borderWidth: 3
                                                 }}
-                                                color={argonTheme.COLORS.PRIMARY}
+                                                color='red'
                                                 label="I agree with the"
+                                                labelStyle={{color:'white'}}
                                             />
                                             <Button
-                                                style={{ width: 100 }}
+                                                style={{ width: 155, backgroundColor:'rgba(55, 55, 55, 1.5)', paddingHorizontal:25, marginLeft:5 }}
 
                                                 color="transparent"
                                                 textStyle={{
-                                                    color: argonTheme.COLORS.PRIMARY,
-                                                    fontSize: 14
+                                                    color:'red',
+                                                    fontSize: 14,
+                                                    fontWeight: 'bold'
                                                 }}
                                             >
                                                 Privacy Policy
                                             </Button>
                                         </Block>
                                         <Block middle>
-                                            <Button color="primary" style={styles.createButton}
+                                            <Button color="white" style={styles.createButton}
                                                     onPress={this.registerUser}>
-                                                <Text bold size={14} color={argonTheme.COLORS.WHITE} style={styles.createText}>
-                                                    CREATE ACCOUNT
-                                                </Text>
+                                                <Block  middle >
+                                                    <Image source={Images.create}  />
+                                                </Block>
                                             </Button>
                                         </Block>
                                     </KeyboardAvoidingView>
 
                                 </Block>
                             </Block>
+                            </ScrollView>
                         </Block>
+
                     </Block>
+
                 </ImageBackground>
 
 
@@ -230,7 +305,7 @@ const styles = StyleSheet.create({
     registerContainer: {
         width: width * 0.9,
         height: height * 0.78,
-        backgroundColor: "#F4F5F7",
+        backgroundColor: 'rgba(52, 52, 52, 0.8)',
         borderRadius: 4,
         shadowColor: argonTheme.COLORS.BLACK,
         shadowOffset: {
@@ -243,7 +318,7 @@ const styles = StyleSheet.create({
         overflow: "hidden"
     },
     socialConnect: {
-        backgroundColor: argonTheme.COLORS.WHITE,
+        backgroundColor: 'rgba(52, 52, 52, 0.8)',
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderColor: "#8898AA"
     },
@@ -279,7 +354,8 @@ const styles = StyleSheet.create({
     createButton: {
         width: width * 0.25,
         height: height * 0.07,
-        marginTop: 25
+        marginTop: 25,
+        marginBottom:theme.SIZES.BASE
     }
 });
 

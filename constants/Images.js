@@ -12,6 +12,9 @@ const iOSLogo = require("../assets/imgs/ios.png");
 const androidLogo = require("../assets/imgs/android.png");
 const login = require("../assets/imgs/login.jpg");
 const register = require("../assets/imgs/register.png");
+const create = require("../assets/imgs/12_-_user_add_plus_contact_account_new_create-512.png");
+const google = require("../assets/imgs/google.jpg");
+const github = require("../assets/imgs/github-octocat.png");
 // internet imgs
 
 const ProfilePicture = 'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?fit=crop&w=1650&q=80';
@@ -44,5 +47,8 @@ export default {
   androidLogo,
   coreLogo,
   login,
-  register
+  register,
+  create,
+  google,
+  github
 };

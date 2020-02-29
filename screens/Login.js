@@ -4,9 +4,10 @@ import {
     ImageBackground,
     Dimensions,
     StatusBar,
+    View,
     KeyboardAvoidingView,
     ScrollView,
-    Alert
+    Alert, Image
 } from "react-native";
 import { Block, Checkbox, Text, theme } from "galio-framework";
 
@@ -83,10 +84,8 @@ class Login extends React.Component {
 
                             <Block flex>
 
-                                <Block flex={0.17} middle>
-                                    <Text color="#8898AA" size={12}>
-                                        Or sign up the classic way
-                                    </Text>
+                                <Block flex={0.17} middle style={{ marginBottom: 50 }}>
+                                    <Image source={Images.coreLogo} style={styles.logo} />
                                 </Block>
                                 <Block flex center>
                                     <KeyboardAvoidingView
@@ -95,7 +94,7 @@ class Login extends React.Component {
                                         enabled
                                     >
 
-                                        <Block width={width * 0.8} style={{ marginBottom: 15 }}>
+                                        <Block width={width * 0.8} style={{ marginBottom: 30 }}>
                                             <Input
                                                 borderless
                                                 placeholder="Email"
@@ -131,20 +130,21 @@ class Login extends React.Component {
                                         </Block>
 
                                         <Block left>
-                                            <Button color="primary" style={styles.createButton}
+                                            <View style={{flexDirection:'row', paddingHorizontal:30 }}>
+                                            <Button color="white" style={styles.createButton}
                                                     onPress={this.openRegisterPage}>
-                                                <Text bold size={14} color={argonTheme.COLORS.WHITE} style={styles.createText}>
-                                                    REGISTER HERE
-                                                </Text>
+                                                <Block  middle >
+                                                    <Image source={Images.register}  />
+                                                </Block>
                                             </Button>
-                                        </Block>
-                                        <Block right>
-                                            <Button color="primary" style={styles.createButton}
+
+                                            <Button color="white" style={styles.createButton}
                                                     onPress={this.getData}>
-                                                <Text bold size={14} color={argonTheme.COLORS.WHITE} style={styles.createText}>
-                                                    CREATE ACCOUNT
-                                                </Text>
+                                                <Block  middle >
+                                                    <Image source={Images.login}  />
+                                                </Block>
                                             </Button>
+                                                </View>
                                         </Block>
                                     </KeyboardAvoidingView>
 
@@ -161,7 +161,7 @@ class Login extends React.Component {
 const styles = StyleSheet.create({
     registerContainer: {
         width: width * 0.9,
-        height: height * 0.78,
+        height: height * 0.58,
         backgroundColor: "#F4F5F7",
         borderRadius: 4,
         shadowColor: argonTheme.COLORS.BLACK,
@@ -173,6 +173,12 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         elevation: 1,
         overflow: "hidden"
+    },
+    logo:{
+        height:109,
+        width:100,
+        marginTop: 50,
+
     },
     socialConnect: {
         backgroundColor: argonTheme.COLORS.WHITE,
@@ -206,12 +212,15 @@ const styles = StyleSheet.create({
     passwordCheck: {
         paddingLeft: 15,
         paddingTop: 13,
-        paddingBottom: 30
+        paddingBottom: 30,
+        marginTop:150,
     },
     createButton: {
         width: width * 0.25,
         height: height * 0.07,
-        marginTop: 25
+        marginTop: 25,
+        marginLeft: 18,
+
     }
 });
 

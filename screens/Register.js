@@ -6,7 +6,8 @@ import {
     StatusBar,
     KeyboardAvoidingView,
     ScrollView,
-    Alert
+    Alert,
+    Image
 } from "react-native";
 import { Block, Checkbox, Text, theme } from "galio-framework";
 
@@ -67,6 +68,7 @@ class Register extends React.Component {
 
     render() {
         const { navigation } = this.props;
+
         return (
             <Block flex middle>
                 <StatusBar hidden />
@@ -81,6 +83,7 @@ class Register extends React.Component {
                                     Sign up with
                                 </Text>
                                 <Block row style={{ marginTop: theme.SIZES.BASE }}>
+
                                     <Button style={{ ...styles.socialButtons, marginRight: 30 }}>
                                         <Block row>
                                             <Icon
@@ -90,7 +93,7 @@ class Register extends React.Component {
                                                 color={"black"}
                                                 style={{ marginTop: 2, marginRight: 5 }}
                                             />
-                                            <Text style={styles.socialTextButtons}>GITHUB</Text>
+                                            <Text style={styles.socialTextButtons}>hi</Text>
                                         </Block>
                                     </Button>
                                     <Button style={styles.socialButtons}>
@@ -122,6 +125,7 @@ class Register extends React.Component {
                                         enabled
                                     >
                                         <Block width={width * 0.8} style={{ marginBottom: 15 }}>
+
                                             <Input
                                                 borderless
                                                 placeholder="Name"
@@ -215,6 +219,8 @@ class Register extends React.Component {
                         </Block>
                     </Block>
                 </ImageBackground>
+
+
             </Block>
         );
     }

@@ -5,7 +5,7 @@ $db=new Database();
 $con=$db->getConnection();
 
 
-$CheckSQL = "SELECT * FROM users";
+$CheckSQL = "SELECT * FROM visitor";
 
 $results=mysqli_query($con, $CheckSQL);
 //echo mysqli_num_rows($results);
@@ -15,7 +15,7 @@ $results=mysqli_query($con, $CheckSQL);
 
 if (mysqli_num_rows($results) == 0) {
 
-    $EmailExistMSG = 'No Users ! Please enter some users for display ';
+    $EmailExistMSG = 'No Visitor ! Please enter some Visitors for display ';
 
 
     $EmailExistJson = json_encode($EmailExistMSG);
@@ -28,14 +28,12 @@ if (mysqli_num_rows($results) == 0) {
     foreach($results as $res){
         extract($res);
         $post_item = array(
-            'user_id' => $user_id,
+            'visitor_id' => $visitor_id,
             'f_name' => $f_name,
             'l_name' => $l_name,
-            'email' => $email,
-            'password' => $password,
-            'wing' => $wing,
-            'flat_no' => $flat_no,
-            'phone_number' => $phone_number
+            'email_id' => $email_id,
+            'phone_no' => $phone_no,
+            'visitor_type_id' => $visitor_type_id
         );
 
 

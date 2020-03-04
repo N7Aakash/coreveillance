@@ -10,23 +10,24 @@ $json = file_get_contents('php://input');
 
 $obj = json_decode($json, true);
 
+//$l_name = $obj['user_role_id'];
 $f_name = $obj['f_name'];
-$l_name = $obj['f_name'];
-$email = $obj['email'];
-$password = password_hash($obj['password'],PASSWORD_BCRYPT);
+$l_name = $obj['l_name'];
+$user_email = $obj['email'];
+//$password = password_hash($obj['password'],PASSWORD_BCRYPT);
+$password = $obj['password'];
 $wing = $obj['wing'];
 $flat_no = $obj['flat_no'];
 $phone_number = $obj['phone_number'];
 
 //echo $email;
 
-$CheckSQL = "SELECT * FROM users WHERE user_email='$email'";
+$CheckSQL = "SELECT * FROM users WHERE email='$user_email'";
 
 // Executing SQL Query.
-$check = mysqli_fetch_array(mysqli_query($con, $CheckSQL));
+$result=mysqli_query($con, $CheckSQL);
 
-
-if (isset($check)) {
+if (mysqli_num_rows($result)==1) {
 
     $EmailExistMSG = 'Email Already Exist, Please Try Again !!!';
 
@@ -38,7 +39,7 @@ if (isset($check)) {
 } else {
 
 
-    $Sql_Query = "insert into users (f_name,l_name,email,password,wing,flat_no,phone_number) values ('$f_name','$l_name','$email','$password','$wing','$flat_no','$phone_number')";
+    $Sql_Query = "insert into users (user_role_id,f_name,l_name,email,password,wing,flat_no,phone_number) values (3,'$f_name','$l_name','$user_email','$password','$wing','$flat_no','$phone_number')";
 
 
     if (mysqli_query($con, $Sql_Query)) {

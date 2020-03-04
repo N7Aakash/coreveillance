@@ -24,6 +24,7 @@ import DrawerItem from "../components/DrawerItem";
 import Header from "../components/Header";
 import Register from "../screens/Register";
 import Privacy from "../screens/Privacy";
+import PicCamera from "../screens/PicCamera";
 
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
   transitionSpec: {
@@ -136,6 +137,12 @@ const HomeStack = createStackNavigator(
 );
 const AccountStack = createStackNavigator(
     {
+      PicCamera: {
+        screen: PicCamera,
+        navigationOptions: ({ navigation }) => ({
+          headerTransparent: true
+        })
+      },
       Login: {
         screen: Login,
         navigationOptions: ({ navigation }) => ({

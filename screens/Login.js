@@ -23,6 +23,7 @@ class Login extends React.Component {
         this.state = {
             UserEmail: '',
             UserPassword: '',
+            UserFlat:'',
         }
 
     }
@@ -30,6 +31,20 @@ class Login extends React.Component {
         {  this.props.navigation.navigate("Register")}
     };
     getData = (title, message) =>{
+
+
+        let email=this.state.UserEmail;
+        let flat=this.state.UserFlat;
+        let requestType='';
+        if(email.length > 0){
+            console.log("email" + email);
+            requestType=1;
+        }else if(flat.length > 0 ){
+            console.log("flat "  + flat);
+            requestType=0;
+
+        }
+        console.log("Password:" + this.state.UserPassword);
 
         fetch('http://192.168.43.52/ReactTemplates/argon/PHP/singleRead.php', {
             method: 'POST',
@@ -39,15 +54,17 @@ class Login extends React.Component {
             },
             body: JSON.stringify({
                 email: this.state.UserEmail,
-                password: this.state.UserPassword
+                password: this.state.UserPassword,
+                flat_no:this.state.UserFlat,
+                requestType:requestType,
             })
 
         }).then((response) => response.json())
             .then((responseJson) => {
 
 
-                if(responseJson === "Email does Not Exist, Please Login First !!!"){
-                    Alert.alert("Email does Not Exist, Please Login First !!!", message);
+                if(responseJson === "User does Not Exist, Please Login First !!!"){
+                    Alert.alert("User does Not Exist, Please Login First !!!", message);
                 }
                 else if(responseJson === "Password matched"){
                     {  this.props.navigation.navigate("Home")}
@@ -56,7 +73,7 @@ class Login extends React.Component {
                     Alert.alert("Incorrect Password/Email ID", message);
                 }
                 else{
-                    Alert.alert("Try Again",message);
+                    Alert.alert("Incorrect credentials , Try AGAIN",message);
                 }
                 // console.log(responseJson);
 

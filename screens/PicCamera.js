@@ -137,3 +137,4 @@ export default class PicCamera extends React.Component {
     }
 
 }
+

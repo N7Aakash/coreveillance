@@ -19,9 +19,9 @@ $password = $obj['password'];
 $wing = $obj['wing'];
 $flat_no = $obj['flat_no'];
 $phone_number = $obj['phone_number'];
-
+$token=$obj['token'];
 //echo $email;
-
+//print_r($obj);
 $CheckSQL = "SELECT * FROM users WHERE email='$user_email'";
 
 // Executing SQL Query.
@@ -39,7 +39,7 @@ if (mysqli_num_rows($result)==1) {
 } else {
 
 
-    $Sql_Query = "insert into users (user_role_id,f_name,l_name,email,password,wing,flat_no,phone_number) values (3,'$f_name','$l_name','$user_email','$password','$wing','$flat_no','$phone_number')";
+    $Sql_Query = "insert into users (user_role_id,f_name,l_name,email,password,wing,flat_no,phone_number,user_token) values (5,'$f_name','$l_name','$user_email','$password','$wing','$flat_no','$phone_number','$token')";
 
 
     if (mysqli_query($con, $Sql_Query)) {

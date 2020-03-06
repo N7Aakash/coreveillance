@@ -26,6 +26,8 @@ import Register from "../screens/Register";
 import Privacy from "../screens/Privacy";
 import PicCamera from "../screens/PicCamera";
 
+
+
 const transitionConfig = (transitionProps, prevTransitionProps) => ({
   transitionSpec: {
     duration: 400,
@@ -137,12 +139,6 @@ const HomeStack = createStackNavigator(
 );
 const AccountStack = createStackNavigator(
     {
-      PicCamera: {
-        screen: PicCamera,
-        navigationOptions: ({ navigation }) => ({
-          headerTransparent: true
-        })
-      },
       Login: {
         screen: Login,
         navigationOptions: ({ navigation }) => ({

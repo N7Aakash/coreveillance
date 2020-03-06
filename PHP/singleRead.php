@@ -8,16 +8,24 @@ $json = file_get_contents('php://input');
 
 $obj = json_decode($json, true);
 
-$email = $obj['email'];
-$pass=$obj['password'];
-$CheckSQL = "SELECT * FROM users WHERE email='$email'";
 
+$pass=$obj['password'];
+$type=$obj['requestType'];
+
+if($type==1){
+$email = $obj['email'];
+$CheckSQL = "SELECT * FROM users WHERE email='$email'";
+}
+else{
+$flat_no = $obj['flat_no'];
+$CheckSQL = "SELECT * FROM users WHERE flat_no='$flat_no'";
+}
 // Executing SQL Query.
 $result=mysqli_query($con, $CheckSQL);
 
 
 if (mysqli_num_rows($result)==0) {
-    $EmailExistMSG = 'Email does Not Exist, Please Register First !!!';
+    $EmailExistMSG = 'User does Not Exist, Please Register First !!!';
    //    var_dump($obj);
     // Converting the message into JSON format.
     $EmailExistJson = json_encode($EmailExistMSG);
@@ -45,4 +53,5 @@ else {
     echo 'Try Again';
 
 }
+//echo $type;
 mysqli_close($con);

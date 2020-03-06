@@ -5,7 +5,7 @@ $db=new Database();
 $con=$db->getConnection();
 
 
-$CheckSQL = "SELECT * FROM users";
+$CheckSQL = "SELECT * FROM users ";
 
 $results=mysqli_query($con, $CheckSQL);
 //echo mysqli_num_rows($results);
@@ -29,6 +29,8 @@ if (mysqli_num_rows($results) == 0) {
         extract($res);
         $post_item = array(
             'user_id' => $user_id,
+            'user_role_id' => $user_role_id,
+            'user_token' => $user_token,
             'f_name' => $f_name,
             'l_name' => $l_name,
             'email' => $email,

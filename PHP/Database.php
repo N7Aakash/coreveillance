@@ -8,8 +8,8 @@ class Database{
 
     public function __construct(){
         $this->host = "localhost";
-        $this->username = "Dhiren Chotwani";
-        $this->password = "Activa9015";
+        $this->username = "root";
+        $this->password = "";
         //
         $this->database = "core";
         $this->connectDB();

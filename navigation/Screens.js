@@ -16,6 +16,7 @@ import Profile from "../screens/Profile";
 import Login from "../screens/Login";
 import Elements from "../screens/Elements";
 import Articles from "../screens/Articles";
+
 // drawer
 import Menu from "./Menu";
 import DrawerItem from "../components/DrawerItem";
@@ -24,6 +25,7 @@ import DrawerItem from "../components/DrawerItem";
 import Header from "../components/Header";
 import Register from "../screens/Register";
 import Privacy from "../screens/Privacy";
+
 import PicCamera from "../screens/PicCamera";
 
 
@@ -156,7 +158,7 @@ const AccountStack = createStackNavigator(
       navigationOptions: ({ navigation }) => ({
     headerTransparent: true
   })
-}
+},
 },
     {
       cardStyle: { backgroundColor: "#FFFFFF" },

@@ -19,7 +19,7 @@ $password = $obj['password'];
 $wing = $obj['wing'];
 $flat_no = $obj['flat_no'];
 $phone_number = $obj['phone_number'];
-$token=$obj['token'];
+$token=$obj['user_token'];
 //echo $email;
 //print_r($obj);
 $CheckSQL = "SELECT * FROM users WHERE email='$user_email'";

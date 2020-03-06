@@ -19,7 +19,7 @@ import { Block, Checkbox, theme,Text } from "galio-framework";
 import { Button, Icon, Input } from "../components";
 import { Images, argonTheme } from "../constants";
 
-
+import registerForPushNotificationsAsync from "./registerForPushNotificationsAsync.js";
 import { FontAwesome, MaterialIcons,MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Permissions from "expo-permissions";
 import {Notifications} from "expo";
@@ -44,37 +44,30 @@ class Register extends React.Component {
 
         }
     }
-    async registerForPushNotificationsAsync() {
-       // const PUSH_ENDPOINT = 'http://192.168.43.52/ReactTemplates/argon/PHP/token_insert.php';
-        const {status} = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-        if (status !== 'granted') {
-            alert('No notification permissions!');
-            return;
-        }
-
-        // Get the token that identifies this device
-        let token= await Notifications.getExpoPushTokenAsync();
-
-        // return fetch(PUSH_ENDPOINT, {
-        //     method: 'POST',
-        //     headers: {
-        //         Accept: 'application/json',
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //
-        //         token: token,
-        //     }),
-        // });
-        this.setState({
-           token:token})
-    }
+    // async registerForPushNotificationsAsync() {
+    //     const {status} = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    //     if (status !== 'granted') {
+    //         alert('No notification permissions!');
+    //         return;
+    //     }
+    //
+    //     // Get the token that identifies this device
+    //     let token= await Notifications.getExpoPushTokenAsync();
+    //     this.setState({
+    //        user_token:token})
+    // }
 
 
     componentWillMount() {
-        this.registerForPushNotificationsAsync();
 
-    }
+        registerForPushNotificationsAsync()
+            .then((data) => {
+            this.setState({
+                user_token:data,
+            })
+        });
+            }
+
 
     sample=(password)=>{
         console.log(password);
@@ -114,7 +107,7 @@ class Register extends React.Component {
                 wing:this.state.wing,
                 flat_no:this.state.flat_no,
                 phone_number:this.state.phone_number,
-                token:this.state.token,
+                user_token:this.state.user_token,
 
             })
 
@@ -122,6 +115,7 @@ class Register extends React.Component {
             .then((responseJson) => {
 
                 // Showing response message coming from server after inserting records.
+                console.log(responseJson);
                 if(responseJson.length === 6){
                     Alert.alert("User Registered Successfully!", message);
                     {  this.props.navigation.navigate("Login")}
@@ -136,7 +130,7 @@ class Register extends React.Component {
     };
 
 
-    render() {
+    render(){
         const {navigation} = this.props;
         const {hasPermission} = this.state;
         if (hasPermission === null) {

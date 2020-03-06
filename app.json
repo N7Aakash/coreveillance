@@ -9,6 +9,8 @@
       "android"
     ],
     "version": "1.3.0",
+    "notification.iosDisplayInForeground": true,
+    "_displayInForeground": true,
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -23,7 +25,9 @@
       "**/*"
     ],
     "ios": {
+
       "supportsTablet": true
+
     }
   }
 }

@@ -1,12 +1,14 @@
 import React from 'react';
 import { withNavigation } from 'react-navigation';
-import { TouchableOpacity, StyleSheet, Platform, Dimensions } from 'react-native';
+import {TouchableOpacity, StyleSheet, Platform, Dimensions, Alert} from 'react-native';
 import { Button, Block, NavBar, Text, theme } from 'galio-framework';
 
 import Icon from './Icon';
 import Input from './Input';
 import Tabs from './Tabs';
 import argonTheme from '../constants/Theme';
+import registerForPushNotificationsAsync from "../screens/registerForPushNotificationsAsync";
+import {Notifications} from "expo";
 
 const { height, width } = Dimensions.get('window');
 const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 || height === 896 || width === 896);
@@ -46,6 +48,38 @@ const SearchButton = ({isWhite, style, navigation}) => (
 );
 
 class Header extends React.Component {
+
+  componentDidMount() {
+    console.log("hi");
+    registerForPushNotificationsAsync();
+    Notifications.addListener((notification) => {
+      const { data: { text }, origin,route } = notification;
+      console.log("hi");
+      if (origin === 'received'  ) {
+        Alert.alert(
+            'Alert Title',
+            'My Alert Msg',
+            [
+              {
+                text: 'Cancel',
+                onPress: () => this.handler(),
+                style: 'cancel',
+              },
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ]
+        );
+        // console.log("inside noti");
+
+
+      } else if( origin === 'selected'){
+        this.handler();
+      }
+    });
+  }
+  handler = () => {
+    this.props.navigation.navigate("Login");
+  };
+
   handleLeftPress = () => {
     const { back, navigation } = this.props;
     return (back ? navigation.goBack() : navigation.openDrawer());

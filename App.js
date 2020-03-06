@@ -1,11 +1,13 @@
 import React from 'react';
-import { Image } from 'react-native';
-import { AppLoading } from 'expo';
+import { Image, Alert } from 'react-native';
+import {AppLoading, Notifications} from 'expo';
 import { Asset } from 'expo-asset';
 import { Block, GalioProvider } from 'galio-framework';
 
 import Screens from './navigation/Screens';
 import { Images, articles, argonTheme } from './constants';
+
+import registerForPushNotificationsAsync from "./screens/registerForPushNotificationsAsync.js";
 
 // cache app images
 const assetImages = [
@@ -34,7 +36,9 @@ function cacheImages(images) {
 export default class App extends React.Component {
   state = {
     isLoadingComplete: false,
-  }
+  };
+
+
   
   render() {
     if(!this.state.isLoadingComplete) {

@@ -52,7 +52,7 @@ class Visitor extends React.Component {
         if(this.state.loading){
             return(
                 <View style={styles.loader}>
-                    <ActivityIndicator size="large" color="#0c9"/>
+                    <ActivityIndicator size="large" color="red"/>
                 </View>
             )}
         return(

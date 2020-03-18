@@ -201,7 +201,14 @@ const AccountStack = createStackNavigator(
 // divideru se baga ca si cum ar fi un ecrna dar nu-i nimic duh
 const AppStack = createDrawerNavigator(
   {
-
+      Home: {
+          screen: HomeStack,
+          navigationOptions: navOpt => ({
+              drawerLabel: ({ focused }) => (
+                  <DrawerItem focused={focused} title="Home" />
+              )
+          })
+      },
     Onboarding: {
       screen: Onboarding,
       navigationOptions: {
@@ -216,14 +223,7 @@ const AppStack = createDrawerNavigator(
         )
       })
     },
-    Home: {
-      screen: HomeStack,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} title="Home" />
-        )
-      })
-    },
+
     Profile: {
       screen: ProfileStack,
       navigationOptions: navOpt => ({

@@ -1,3 +1,4 @@
+
 export default [
   {
     title: 'Ice cream is made with carrageenan …',

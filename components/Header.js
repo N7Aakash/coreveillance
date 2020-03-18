@@ -57,15 +57,15 @@ class Header extends React.Component {
       console.log("hi");
       if (origin === 'received'  ) {
         Alert.alert(
-            'Alert Title',
-            'My Alert Msg',
+            'Anomaly Detected!!!',
+            'There is a anomaly detected, CHECK NOW!!',
             [
               {
                 text: 'Cancel',
                 onPress: () => this.handler(),
                 style: 'cancel',
               },
-              {text: 'OK', onPress: () => console.log('OK Pressed')},
+              {text: 'OK', onPress: () =>this.handler()},
             ]
         );
         // console.log("inside noti");
@@ -77,7 +77,7 @@ class Header extends React.Component {
     });
   }
   handler = () => {
-    this.props.navigation.navigate("Login");
+    this.props.navigation.navigate("Anomaly");
   };
 
   handleLeftPress = () => {
@@ -193,7 +193,7 @@ class Header extends React.Component {
       return (
         <Block center>
           {search ? this.renderSearch() : null}
-          {options ? this.renderOptions() : null}
+
           {tabs ? this.renderTabs() : null}
         </Block>
       );

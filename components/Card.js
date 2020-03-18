@@ -9,7 +9,7 @@ import { argonTheme } from '../constants';
 
 class Card extends React.Component {
   render() {
-    const { navigation, item, horizontal, full, style, ctaColor, imageStyle } = this.props;
+    const { navigation, item, horizontal, full, style, ctaColor, imageStyle, image } = this.props;
     
     const imageStyles = [
       full ? styles.fullImage : styles.horizontalImage,
@@ -22,19 +22,19 @@ class Card extends React.Component {
     ];
 
     return (
-      <Block row={horizontal} card flex style={cardContainer}>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
-          <Block flex style={imgContainer}>
-            <Image source={{uri: item.image}} style={imageStyles} />
-          </Block>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
-          <Block flex space="between" style={styles.cardDescription}>
-            <Text size={14} style={styles.cardTitle}>{item.title}</Text>
-            <Text size={12} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>{item.cta}</Text>
-          </Block>
-        </TouchableWithoutFeedback>
-      </Block>
+        <Block row={horizontal} card flex style={cardContainer}>
+          <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
+            <Block flex style={imgContainer}>
+              <Image source={{uri: `data:image;base64,${image}`}} style={styles.logo}/>
+            </Block>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
+            <Block flex space="between" style={styles.cardDescription}>
+              <Text size={14} style={styles.cardTitle}>hi</Text>
+              <Text size={12} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>{item.cta}</Text>
+            </Block>
+          </TouchableWithoutFeedback>
+        </Block>
     );
   }
 }
@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
   cardTitle: {
     flex: 1,
     flexWrap: 'wrap',
-    paddingBottom: 6
+    paddingBottom: 6,
+    fontSize:24,
   },
   cardDescription: {
     padding: theme.SIZES.BASE / 2
@@ -67,6 +68,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     elevation: 1,
     overflow: 'hidden',
+
   },
   image: {
     // borderRadius: 3,
@@ -92,6 +94,12 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     shadowOpacity: 0.1,
     elevation: 2,
+  },
+  logo: {
+    width: 500,
+    height: 250,
+    position: 'relative',
+
   },
 });
 

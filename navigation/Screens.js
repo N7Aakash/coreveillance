@@ -11,7 +11,7 @@ import { Block } from "galio-framework";
 // screens
 import Home from "../screens/Home";
 import Onboarding from "../screens/Onboarding";
-import Pro from "../screens/Pro";
+import AnomalyDetail from "../screens/AnomalyDetail";
 import Profile from "../screens/Profile";
 import Login from "../screens/Login";
 import Elements from "../screens/Elements";
@@ -119,19 +119,11 @@ const ProfileStack = createStackNavigator(
 
 const HomeStack = createStackNavigator(
   {
+
     Home: {
       screen: Home,
       navigationOptions: ({ navigation }) => ({
         header: <Header search options title="Home" navigation={navigation} />
-      })
-    },
-    Pro: {
-      screen: Pro,
-      navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header left={<Block />} white transparent title="" navigation={navigation} />
-        ),
-        headerTransparent: true
       })
     },
     RegisterVisitor: {
@@ -168,6 +160,15 @@ const AnomalyStack = createStackNavigator(
           header: <Header search options title="Anomaly" navigation={navigation}/>
         })
       },
+        AnomalyDetail: {
+            screen: AnomalyDetail,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <Header left={<Block />} white transparent title="" navigation={navigation} />
+                ),
+                headerTransparent: true
+            })
+        },
     }
 );
 const AccountStack = createStackNavigator(

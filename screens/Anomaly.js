@@ -66,7 +66,13 @@ componentWillMount() {
         ];
         return(
             <Block  card flex style={cardContainer}>
-                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Pro')} type={data.item.anomaly_type_text}>
+                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('AnomalyDetail',{
+                    anomaly_type_text: data.item.anomaly_type_text,
+                    anomaly_title:data.item.anomaly_title,
+                    anomaly_text:data.item.anomaly_text,
+                    anomaly_frame:data.item.anomaly_frame,
+                    anomaly_image:logoData
+                })} >
                         <Block>
                             <Block flex style={imgContainer}>
                                 <Image source={{uri: `data:image;base64,${logoData}`}} style={styles.logo}/>

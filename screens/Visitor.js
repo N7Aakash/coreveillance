@@ -28,6 +28,7 @@ class Visitor extends React.Component {
                     loading: false,
                     dataSource: responseJson
                 })
+                console.log(responseJson);
             })
             .catch(error=>console.log(error)) //to catch the errors if any
     }

@@ -13,13 +13,13 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
-      todayVisitors: 0,
+      todayVisitors: 1,
       totalVisitors: 0,
 
     }
   }
   getTodayVisitorCount=()=>{
-    fetch('http://192.168.43.52/ReactTemplates/argon/PHP/getTodayVisitors.php', {
+    fetch('http://192.168.43.52/ReactTemplates/argon/PHP/getTodayVisitorsCount.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -53,6 +53,10 @@ class Home extends React.Component {
         }).catch((error) => {
       console.error(error);
     });
+  };
+
+  openTodayVisitorPage=()=>{
+    {  this.props.navigation.navigate("todayVisitor")}
   };
   componentWillMount() {
     this.getTodayVisitorCount();
@@ -89,16 +93,21 @@ class Home extends React.Component {
                 <MaterialCommunityIcons style={styles.inputIcons} name="account-search" size={50} color="white" />
                 <Text style={styles.cardButtonsText}>View Visitors</Text>
               </TouchableOpacity>
-            </Block>
-            <Block style={{flexDirection:'row',justifyContent:'space-around',alignContent:'center', paddingVertical:'2%'}}>
-              <TouchableOpacity style={styles.cardButtons} onPress={this.openVisitorPage}>
+              <TouchableOpacity style={styles.cardButtons} onPress={this.openTodayVisitorPage}>
                 <Text style={styles.cardCountText} >{this.state.todayVisitors}</Text>
                 <Text style={styles.cardButtonsText}>Today's Visitor</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.cardButtons} onPress={this.openVisitorPage}>
+            </Block>
+            <Block style={{flexDirection:'row',justifyContent:'space-around',alignContent:'center', paddingVertical:'2%'}}>
+
+              <View style={styles.cardButtons}>
                 <Text style={styles.cardCountText} >{this.state.totalVisitors}</Text>
                 <Text style={styles.cardButtonsText}>Total Visitors</Text>
-              </TouchableOpacity>
+              </View>
+              <View style={styles.cardButtons}>
+                <Text style={styles.cardCountText} >{this.state.totalVisitors}</Text>
+                <Text style={styles.cardButtonsText}>Total Anomalies</Text>
+              </View>
             </Block>
           </Card>
 

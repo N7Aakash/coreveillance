@@ -6,7 +6,7 @@ $con=$db->getConnection();
 
 $mydate=getdate();
 //echo "$mydate[year]-$mydate[mday]";
-$CheckSQL = "SELECT count(*) as cnt FROM visitor_visiting where created_at like '$mydate[year]-0$mydate[mon]-$mydate[mday]%'";
+$CheckSQL = "SELECT *,visitor_visiting.created_at as check_in FROM visitor_visiting INNER join visitor on visitor_visiting.visitor_id=visitor.visitor_id where visitor_visiting.created_at like '$mydate[year]-0$mydate[mon]-$mydate[mday]%'";
 //echo $CheckSQL;
 $results=mysqli_query($con, $CheckSQL);
 //echo mysqli_num_rows($results);
@@ -25,15 +25,39 @@ if (mysqli_num_rows($results) == 0) {
     echo $EmailExistJson;
 
 } else if(isset($results)){
-    extract(mysqli_fetch_assoc($results));
+   $posts_arr = array();
+      foreach($results as $res){
+          extract($res);
+          $post_item = array(
+              'visitor_id' => $visitor_id,
+              'f_name' => $f_name,
+              'l_name' => $l_name,
+              'email_id' => $email_id,
+              'phone_no' => $phone_no,
+              'visitor_type_id' => $visitor_type_id,
+//              'image'=>$image,
+              'date_first_visited'=>$created_at,
+              'guard_incharge'=>$created_by,
+              'visitor_visiting_flat'=>$visitor_visiting_flat,
+              'visitor_visiting_wing'=>$visitor_visiting_wing,
+              'num_of_pax'=>$num_of_pax,
+              'check_in'=>$check_in,
+          );
+
+
+          array_push($posts_arr, $post_item);
+
+      }
+
+
+          $json = json_encode($posts_arr);
+
+
+          echo $json;
 
 
 
 
-//        $json = json_encode($posts_arr);
-
-
-        echo $cnt;
 
 }
 else {

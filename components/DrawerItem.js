@@ -5,6 +5,8 @@ import { Block, Text, theme } from "galio-framework";
 import Icon from "./Icon";
 import argonTheme from "../constants/Theme";
 
+import { FontAwesome, MaterialIcons,MaterialCommunityIcons } from '@expo/vector-icons';
+
 class DrawerItem extends React.Component {
   renderIcon = () => {
     const { title, focused } = this.props;
@@ -18,6 +20,13 @@ class DrawerItem extends React.Component {
             size={10}
             color={focused ? "white" : argonTheme.COLORS.PRIMARY}
           />
+        );
+      case "Anomaly Statistics":
+        return (
+            <MaterialCommunityIcons  name="chart-donut-variant" size={20}  color={focused ? "white" : argonTheme.COLORS.SUCCESS} />
+
+
+
         );
       case "Elements":
         return (
@@ -39,12 +48,7 @@ class DrawerItem extends React.Component {
         );
       case "Profile":
         return (
-          <Icon
-            name="chart-pie-35"
-            family="ArgonExtra"
-            size={12}
-            color={focused ? "white" : argonTheme.COLORS.WARNING}
-          />
+            <FontAwesome style={styles.inputIcons} name="user" size={20}  color={focused ? "white" : argonTheme.COLORS.INPUT_ERROR} />
         );
       case "Account":
         return (

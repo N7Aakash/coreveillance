@@ -18,6 +18,7 @@ import Elements from "../screens/Elements";
 import Articles from "../screens/Articles";
 import RegisterVisitor from "../screens/RegisterVisitor";
 import Visitor from "../screens/Visitor";
+import AnomalyStatistics from "../screens/AnomalyStatistics";
 
 // drawer
 import Menu from "./Menu";
@@ -27,7 +28,7 @@ import DrawerItem from "../components/DrawerItem";
 import Header from "../components/Header";
 import Register from "../screens/Register";
 import Privacy from "../screens/Privacy";
-import Anomaly from "../screens/Anomaly";
+import AnomalyNotis from "../screens/Anomaly";
 
 import PicCamera from "../screens/PicCamera";
 
@@ -155,10 +156,13 @@ const HomeStack = createStackNavigator(
   }
 );
 
-const RegisterStack = createStackNavigator(
+const RegisterVisitorStack = createStackNavigator(
     {
         PicCamera: {
             screen: PicCamera,
+            navigationOptions: ({ navigation }) => ({
+                headerTransparent: true
+            })
         },
         RegisterVisitor: {
             screen: RegisterVisitor,
@@ -188,18 +192,21 @@ const RegisterStack = createStackNavigator(
 );
 const AnomalyStack = createStackNavigator(
     {
-      Anomaly: {
-        screen: Anomaly,
+        AnomalyStatistics: {
+            screen: AnomalyStatistics,
+            navigationOptions: ({navigation}) => ({
+                header: <Header search options title="Anomaly Statistics" navigation={navigation}/>
+            })
+        },
+      AnomalyNotis: {
+        screen: AnomalyNotis,
         navigationOptions: ({navigation}) => ({
-          header: <Header search options title="Anomaly" navigation={navigation}/>
+          header: <Header search options title="Anomaly Alert" navigation={navigation}/>
         })
       },
         AnomalyDetail: {
             screen: AnomalyDetail,
             navigationOptions: ({ navigation }) => ({
-                header: (
-                    <Header left={<Block />} white transparent title="" navigation={navigation} />
-                ),
                 headerTransparent: true
             })
         },
@@ -232,7 +239,7 @@ const AccountStack = createStackNavigator(
     }
 );
 
-// divideru se baga ca si cum ar fi un ecrna dar nu-i nimic duh
+// d
 const AppStack = createDrawerNavigator(
   {
 
@@ -283,14 +290,14 @@ const AppStack = createDrawerNavigator(
         )
       })
     },
-      // Anamoly: {
-      //     screen: AnomalyStack,
-      //     navigationOptions: navOpt => ({
-      //         drawerLabel: ({ focused }) => (
-      //             <DrawerItem focused={focused} screen="Anomaly" title="Last Anomaly" />
-      //         )
-      //     })
-      // },
+      Anomaly: {
+          screen: AnomalyStack,
+          navigationOptions: navOpt => ({
+              drawerLabel: ({ focused }) => (
+                  <DrawerItem focused={focused} screen="AnomalyStatistics" title="Anomaly Statistics" />
+              )
+          })
+      },
   },
   Menu
 );

@@ -5,22 +5,20 @@ import {
     ActivityIndicator,
     FlatList,
     Text,
-    TouchableOpacity
+    TouchableOpacity, Image, TouchableWithoutFeedback,
 } from "react-native";
+import { Block, theme } from 'galio-framework';
+import {Card} from 'react-native-shadow-cards';
 class Visitor extends React.Component {
-    static navigationOptions = ({ navigation }) => {
-        return {
-            title: "Source Listing",
-            headerStyle: {backgroundColor: "#fff"},
-            headerTitleStyle: {textAlign: "center",flex: 1}
-        };
-    };
     constructor(props) {
         super(props);
         this.state = {
             loading: true,
             dataSource:[]
         };
+    }
+    sample=()=>{
+        console.log("Preesed Visitor Details");
     }
     componentDidMount(){
         fetch("http://192.168.43.52/ReactTemplates/argon/PHP/getVisitors.php")
@@ -44,10 +42,34 @@ class Visitor extends React.Component {
         );
     }
     renderItem=(data)=>
-        <TouchableOpacity style={styles.list}>
-            <Text style={styles.item}>{data.item.f_name}</Text>
+
+
+        <Card style={{padding: 10, margin: 10}}>
+            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate("VisitorDetails",{
+                name:data.item.f_name + " " + data.item.l_name,
+                email:data.item.email_id,
+                phone:data.item.phone_no,
+                image:data.item.image,
+                guard_incharge:data.item.guard_incharge,
+                date_first_visited:data.item.date_first_visited,
+                visitor_type:data.item.visitor_type_id,
+            })}>
+            <Block style={{flexDirection:'row',justifyContent:'space-around',alignContent:'center', paddingVertical:'2%'}}>
+
+                <View>
+                    <Image source={{uri: `data:image;base64,${data.item.image}`}} style={styles.logo}/>
+                </View>
+                <View>
+
+            <Text style={styles.item}>{data.item.f_name + " " + data.item.l_name }</Text>
             <Text style={styles.item}>{data.item.email_id}</Text>
-            <Text style={styles.item}>{data.item.phone_no}</Text></TouchableOpacity>
+            <Text style={styles.item}>{data.item.phone_no}</Text>
+
+                </View>
+            </Block>
+            </TouchableWithoutFeedback>
+        </Card>;
+
     render(){
         if(this.state.loading){
             return(
@@ -57,7 +79,11 @@ class Visitor extends React.Component {
             )}
         return(
             <View style={styles.container}>
+                <Card style={{padding: 10, margin: 10}}>
+                <Text style={{textAlign:'center'}}>All Time Visitors</Text>
+                </Card>
                 <FlatList
+
                     data= {this.state.dataSource}
                     ItemSeparatorComponent = {this.FlatListItemSeparator}
                     renderItem= {item=> this.renderItem(item)}
@@ -69,12 +95,18 @@ class Visitor extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 22
     },
     item: {
-        padding: 10,
+        paddingVertical: '2%',
         fontSize: 18,
-        height: 44,
+        height: 'auto',
+    },
+    logo: {
+        width: 120,
+        height: 150,
+        position: 'relative',
+        borderRadius:20,
+
     },
 });
 export default Visitor;

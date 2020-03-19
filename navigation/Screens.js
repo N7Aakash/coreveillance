@@ -19,7 +19,7 @@ import Articles from "../screens/Articles";
 import RegisterVisitor from "../screens/RegisterVisitor";
 import Visitor from "../screens/Visitor";
 import AnomalyStatistics from "../screens/AnomalyStatistics";
-
+import VisitorDetails from "../screens/VisitorDetails";
 // drawer
 import Menu from "./Menu";
 import DrawerItem from "../components/DrawerItem";
@@ -120,6 +120,7 @@ const ProfileStack = createStackNavigator(
 
 const HomeStack = createStackNavigator(
   {
+
     Home: {
       screen: Home,
       navigationOptions: ({ navigation }) => ({
@@ -128,6 +129,9 @@ const HomeStack = createStackNavigator(
     },
       PicCamera: {
           screen: PicCamera,
+          navigationOptions: ({ navigation }) => ({
+              headerTransparent: true
+          })
       },
       RegisterVisitor: {
           screen: RegisterVisitor,
@@ -138,15 +142,25 @@ const HomeStack = createStackNavigator(
               headerTransparent: true
           })
       },
-    Visitor: {
-      screen: Visitor,
-      navigationOptions: ({ navigation }) => ({
-        header: (
-            <Header left={<Block />} white transparent title="" navigation={navigation} />
-        ),
-        headerTransparent: true
-      })
-    }
+      Visitor: {
+          screen: Visitor,
+          navigationOptions: ({ navigation }) => ({
+              header: (
+                  <Header left={<Block />} white transparent title="" navigation={navigation} />
+              ),
+              headerTransparent: true
+          })
+      },
+      VisitorDetails: {
+          screen: VisitorDetails,
+          navigationOptions: ({ navigation }) => ({
+              header: (
+                  <Header left={<Block />} white transparent title="" navigation={navigation} />
+              ),
+              headerTransparent: true
+          })
+      },
+
   },
   {
     cardStyle: {
@@ -181,7 +195,8 @@ const RegisterVisitorStack = createStackNavigator(
                 ),
                 headerTransparent: true
             })
-        }
+        },
+
     },
     {
         cardStyle: {
@@ -242,20 +257,11 @@ const AccountStack = createStackNavigator(
 // d
 const AppStack = createDrawerNavigator(
   {
-
-    Onboarding: {
+        Onboarding: {
       screen: Onboarding,
       navigationOptions: {
         drawerLabel: () => {}
       }
-    },
-        Account: {
-      screen: AccountStack,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-            <DrawerItem focused={focused} screen="Login" title="Account" />
-        )
-      })
     },
       Home: {
           screen: HomeStack,
@@ -265,6 +271,15 @@ const AppStack = createDrawerNavigator(
               )
           })
       },
+        Account: {
+      screen: AccountStack,
+      navigationOptions: navOpt => ({
+        drawerLabel: ({ focused }) => (
+            <DrawerItem focused={focused} screen="Login" title="Account" />
+        )
+      })
+    },
+
     Profile: {
       screen: ProfileStack,
       navigationOptions: navOpt => ({

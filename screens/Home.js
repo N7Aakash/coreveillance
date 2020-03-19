@@ -63,7 +63,7 @@ class Home extends React.Component {
     {  this.props.navigation.navigate("Visitor")}
   };
   openRegisterVisitorPage = ()=> {
-    {  this.props.navigation.navigate("RegisterVisitor")}
+    {  this.props.navigation.navigate("PicCamera")}
   };
   openManageVisitorPage = ()=> {
     {  this.props.navigation.navigate("RegisterVisitor")}
@@ -91,11 +91,11 @@ class Home extends React.Component {
               </TouchableOpacity>
             </Block>
             <Block style={{flexDirection:'row',justifyContent:'space-around',alignContent:'center', paddingVertical:'2%'}}>
-              <TouchableOpacity style={styles.cardButtons} onPress={this.openRegisterVisitorPage}>
+              <TouchableOpacity style={styles.cardButtons} onPress={this.openVisitorPage}>
                 <Text style={styles.cardCountText} >{this.state.todayVisitors}</Text>
                 <Text style={styles.cardButtonsText}>Today's Visitor</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.cardButtons} onPress={this.openManageVisitorPage}>
+              <TouchableOpacity style={styles.cardButtons} onPress={this.openVisitorPage}>
                 <Text style={styles.cardCountText} >{this.state.totalVisitors}</Text>
                 <Text style={styles.cardButtonsText}>Total Visitors</Text>
               </TouchableOpacity>

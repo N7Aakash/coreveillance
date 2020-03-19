@@ -119,22 +119,24 @@ const ProfileStack = createStackNavigator(
 
 const HomeStack = createStackNavigator(
   {
-
     Home: {
       screen: Home,
       navigationOptions: ({ navigation }) => ({
         header: <Header search options title="Home" navigation={navigation} />
       })
     },
-    RegisterVisitor: {
-      screen: RegisterVisitor,
-      navigationOptions: ({ navigation }) => ({
-        header: (
-            <Header left={<Block />} white transparent title="" navigation={navigation} />
-        ),
-        headerTransparent: true
-      })
-    },
+      PicCamera: {
+          screen: PicCamera,
+      },
+      RegisterVisitor: {
+          screen: RegisterVisitor,
+          navigationOptions: ({ navigation }) => ({
+              header: (
+                  <Header left={<Block />} white transparent title="" navigation={navigation} />
+              ),
+              headerTransparent: true
+          })
+      },
     Visitor: {
       screen: Visitor,
       navigationOptions: ({ navigation }) => ({
@@ -151,6 +153,38 @@ const HomeStack = createStackNavigator(
     },
     transitionConfig
   }
+);
+
+const RegisterStack = createStackNavigator(
+    {
+        PicCamera: {
+            screen: PicCamera,
+        },
+        RegisterVisitor: {
+            screen: RegisterVisitor,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <Header left={<Block />} white transparent title="" navigation={navigation} />
+                ),
+                headerTransparent: true
+            })
+        },
+        Visitor: {
+            screen: Visitor,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <Header left={<Block />} white transparent title="" navigation={navigation} />
+                ),
+                headerTransparent: true
+            })
+        }
+    },
+    {
+        cardStyle: {
+            backgroundColor: "#F8F9FE"
+        },
+        transitionConfig
+    }
 );
 const AnomalyStack = createStackNavigator(
     {
@@ -201,14 +235,7 @@ const AccountStack = createStackNavigator(
 // divideru se baga ca si cum ar fi un ecrna dar nu-i nimic duh
 const AppStack = createDrawerNavigator(
   {
-      Home: {
-          screen: HomeStack,
-          navigationOptions: navOpt => ({
-              drawerLabel: ({ focused }) => (
-                  <DrawerItem focused={focused} title="Home" />
-              )
-          })
-      },
+
     Onboarding: {
       screen: Onboarding,
       navigationOptions: {
@@ -223,7 +250,14 @@ const AppStack = createDrawerNavigator(
         )
       })
     },
-
+      Home: {
+          screen: HomeStack,
+          navigationOptions: navOpt => ({
+              drawerLabel: ({ focused }) => (
+                  <DrawerItem focused={focused} title="Home" />
+              )
+          })
+      },
     Profile: {
       screen: ProfileStack,
       navigationOptions: navOpt => ({
@@ -249,14 +283,14 @@ const AppStack = createDrawerNavigator(
         )
       })
     },
-      Anamoly: {
-          screen: AnomalyStack,
-          navigationOptions: navOpt => ({
-              drawerLabel: ({ focused }) => (
-                  <DrawerItem focused={focused} screen="Anomaly" title="Last Anomaly" />
-              )
-          })
-      },
+      // Anamoly: {
+      //     screen: AnomalyStack,
+      //     navigationOptions: navOpt => ({
+      //         drawerLabel: ({ focused }) => (
+      //             <DrawerItem focused={focused} screen="Anomaly" title="Last Anomaly" />
+      //         )
+      //     })
+      // },
   },
   Menu
 );

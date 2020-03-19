@@ -44,31 +44,38 @@ export default class PicCamera extends React.Component {
     takePicture = async () => {
         const options = { base64: true, exif: true};
         if (this.camera) {
-            let photo = await this.camera.takePictureAsync(options)
-            ;
-           // console.log(photo['base64']);
-            fetch('http://192.168.43.52/ReactTemplates/argon/PHP/image_put.php', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json,text/plain',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-
-                    image: photo['base64']
+            let photo = await this.camera.takePictureAsync(options);
+          //  console.log(photo['base64']);
+            if('base64' in  photo) {
+                console.log("Picture Captured");
+                this.props.navigation.navigate('RegisterVisitor',{
+                   captured_image:photo['base64']
                 })
-            }).then((response) => response.text())
-                .then((responseJson) => {
-
-                    // Showing response message coming from server after inserting records.
-
-
-                        {   console.log(responseJson)}
-
-
-                }).catch((error) => {
-                console.error(error);
-            });
+            }
+            else
+                alert("Error in Capturing Image!! TRY AGAIN ");
+           //  fetch('http://192.168.43.52/ReactTemplates/argon/PHP/image_put.php', {
+           //      method: 'POST',
+           //      headers: {
+           //          'Accept': 'application/json,text/plain',
+           //          'Content-Type': 'application/json',
+           //      },
+           //      body: JSON.stringify({
+           //
+           //          image: photo['base64']
+           //      })
+           //  }).then((response) => response.text())
+           //      .then((responseJson) => {
+           //
+           //          // Showing response message coming from server after inserting records.
+           //
+           //
+           //              {   console.log(responseJson)}
+           //
+           //
+           //      }).catch((error) => {
+           //      console.error(error);
+           //  });
 
         }
     };

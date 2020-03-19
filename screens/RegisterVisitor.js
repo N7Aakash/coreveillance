@@ -8,7 +8,7 @@ import {
     ScrollView,
     Alert,
     Image,
-
+    Picker,
     TouchableOpacity,
     TouchableHighlight,
     Modal,
@@ -34,21 +34,14 @@ class RegisterVisitor extends React.Component {
             l_name: '',
             email_id: '',
             phone_no:'',
+            visitor_type:1,
+            captured_image:this.props.navigation.state.params.captured_image,
 
-        }
+        };
+      //  console.log(this.state.captured_image);
+       // console.log("at Register Component");
     }
-    // async registerForPushNotificationsAsync() {
-    //     const {status} = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-    //     if (status !== 'granted') {
-    //         alert('No notification permissions!');
-    //         return;
-    //     }
-    //
-    //     // Get the token that identifies this device
-    //     let token= await Notifications.getExpoPushTokenAsync();
-    //     this.setState({
-    //        user_token:token})
-    // }
+
 
 
 
@@ -65,6 +58,8 @@ class RegisterVisitor extends React.Component {
                 l_name: this.state.l_name,
                 email_id:this.state.email_id,
                 phone_no:this.state.phone_no,
+                 image:this.state.captured_image,
+                visitor_type:this.state.visitor_type,
 
             })
 
@@ -72,24 +67,32 @@ class RegisterVisitor extends React.Component {
             .then((responseJson) => {
 
                 // Showing response message coming from server after inserting records.
-                console.log(responseJson);
+                // console.log(responseJson);
                 if(responseJson.length === 6){
                     Alert.alert("Visitor Registered Successfully!", message);
                     {  this.props.navigation.navigate("Home")}
                     // console.log("inside true");
                 }
-                //    console.log(responseJson.length);
+                   // console.log(responseJson.length);
 
             }).catch((error) => {
             console.error(error);
         });
         //console.log("hi");
     };
-
+    tapVisitorChange=(type)=>{
+        console.log(type);
+        this.setState({
+            visitor_type:type,
+        })
+    };
 
     render(){
         const {navigation} = this.props;
         const {hasPermission} = this.state;
+        const imgContainer = [styles.imageContainer,
+            styles.shadow
+        ];
         if (hasPermission === null) {
             return <View/>;
         } else if (hasPermission === false) {
@@ -186,6 +189,22 @@ class RegisterVisitor extends React.Component {
                                                         }
                                                     />
                                                 </Block>
+                                                <Block width={width * 0.8} style={{marginBottom: 15}}>
+                                                <Picker
+                                                    selectedValue={this.state.visitor_type}
+                                                    mode={'dropdown'}
+                                                    style={{height: 50, width: 'auto', backgroundColor:'white'}}
+                                                    onValueChange={(itemValue, itemIndex) =>
+                                                       this.tapVisitorChange(itemValue)
+                                                    }>
+                                                    <Picker.Item label="NEW VISITOR" value="1" />
+                                                    <Picker.Item label="FREQUENT VISITOR" value="2" />
+
+                                                </Picker>
+                                                </Block>
+                                                <Block flex style={imgContainer}>
+                                                    <Image source={{uri: `data:image;base64,${this.state.captured_image}`}} style={styles.logo}/>
+                                                </Block>
 
 
 
@@ -270,7 +289,19 @@ const styles = StyleSheet.create({
         height: height * 0.07,
         marginTop: 25,
         marginBottom:theme.SIZES.BASE
-    }
+    },
+    logo: {
+        width: 'auto',
+        height: 350,
+        position: 'relative',
+
+    },
+    imageContainer: {
+        borderRadius: 3,
+        elevation: 1,
+        overflow: 'hidden',
+
+    },
 });
 
 export default RegisterVisitor;

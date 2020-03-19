@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Dimensions, ScrollView, Alert, Button, View,Text, TouchableOpacity} from 'react-native';
 import { Block, theme } from 'galio-framework';
-
+import argonTheme from "../constants/Theme";
 import {Card} from 'react-native-shadow-cards';
 import {MaterialIcons, MaterialCommunityIcons} from "@expo/vector-icons";
 import registerForPushNotificationsAsync from "./registerForPushNotificationsAsync";
@@ -90,7 +90,7 @@ class Home extends React.Component {
     {  this.props.navigation.navigate("PicCamera")}
   };
   openManageVisitorPage = ()=> {
-    {  this.props.navigation.navigate("RegisterVisitor")}
+    {  this.props.navigation.navigate("ManageVisitors")}
   };
 
   render() {
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
 
   },
   cardButtons:{
-    height: 150, width:150, backgroundColor:'#04456b',
+    height: 150, width:150, backgroundColor:argonTheme.COLORS.WARNING,
     alignItems:'center',
     paddingVertical:40,
     borderRadius:20

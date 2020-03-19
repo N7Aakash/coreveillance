@@ -15,7 +15,7 @@ const { width } = Dimensions.get("screen");
 const Drawer = props => (
   <Block style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
     <Block flex={0.05} style={styles.header}>
-      <Image styles={styles.logo} source={Images.Logo} />
+      <Image source={{uri: `data:image;base64,${Images.logoData}`}} style={styles.logo} />
     </Block>
     <Block flex>
       <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
@@ -62,7 +62,14 @@ const styles = StyleSheet.create({
     paddingBottom: theme.SIZES.BASE,
     paddingTop: theme.SIZES.BASE * 3,
     justifyContent: 'center'
-  }
+  },
+  logo: {
+
+    height: 38,
+    zIndex: 2,
+
+    marginTop: '-2%'
+  },
 });
 
 export default Menu;

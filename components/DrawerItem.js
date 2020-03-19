@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14
   },
   activeStyle: {
-    backgroundColor: argonTheme.COLORS.ACTIVE,
+    backgroundColor: argonTheme.COLORS.WARNING,
     borderRadius: 4
   },
   shadow: {

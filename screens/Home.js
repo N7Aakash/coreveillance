@@ -13,8 +13,9 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
-      todayVisitors: 1,
+      todayVisitors: 0,
       totalVisitors: 0,
+      totalAnomalies:0,
 
     }
   }
@@ -30,6 +31,24 @@ class Home extends React.Component {
 
           this.setState({
             todayVisitors:responseJson,
+          })
+
+        }).catch((error) => {
+      console.error(error);
+    });
+  };
+  getAnomaliesCount=()=>{
+    fetch('http://192.168.43.52/ReactTemplates/argon/PHP/getAnomaliesCount.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => response.text())
+        .then((responseJson) => {
+
+          this.setState({
+            totalAnomalies:responseJson,
           })
 
         }).catch((error) => {
@@ -61,6 +80,7 @@ class Home extends React.Component {
   componentWillMount() {
     this.getTodayVisitorCount();
     this.getTotalVisitorCount();
+    this.getAnomaliesCount();
   }
 
   openVisitorPage = ()=> {
@@ -105,7 +125,7 @@ class Home extends React.Component {
                 <Text style={styles.cardButtonsText}>Total Visitors</Text>
               </View>
               <View style={styles.cardButtons}>
-                <Text style={styles.cardCountText} >{this.state.totalVisitors}</Text>
+                <Text style={styles.cardCountText} >{this.state.totalAnomalies}</Text>
                 <Text style={styles.cardButtonsText}>Total Anomalies</Text>
               </View>
             </Block>

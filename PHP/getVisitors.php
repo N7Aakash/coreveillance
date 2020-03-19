@@ -34,7 +34,7 @@ if (mysqli_num_rows($results) == 0) {
             'email_id' => $email_id,
             'phone_no' => $phone_no,
             'visitor_type_id' => $visitor_type_id,
-//            'image'=>$image,
+            'image'=>$image,
             'date_first_visited'=>$created_at,
             'guard_incharge'=>$created_by
         );

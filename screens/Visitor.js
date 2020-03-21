@@ -21,7 +21,7 @@ class Visitor extends React.Component {
         console.log("Preesed Visitor Details");
     }
     componentDidMount(){
-        fetch("http://192.168.43.52/ReactTemplates/argon/PHP/getVisitors.php")
+        fetch("http://172.20.10.4/coreveilliance/argon/PHP/getVisitors.php")
             .then(response => response.json())
             .then((responseJson)=> {
                 this.setState({

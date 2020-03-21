@@ -29,7 +29,7 @@ class Anomaly extends React.Component {
         }
     }
    async getData(){
-        let response = await fetch( "http://192.168.43.52/ReactTemplates/argon/PHP/image_get.php");
+        let response = await fetch( "http://172.20.10.4/coreveilliance/PHP/image_get.php");
         let responseJson = await response.json();
        // console.log(responseJson);
         console.log("Images : " + JSON.stringify(responseJson));

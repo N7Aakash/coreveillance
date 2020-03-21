@@ -46,7 +46,7 @@ class RegisterVisitor extends React.Component {
 
 
     registerUser = (title, message) =>{
-        fetch('http://192.168.43.52/ReactTemplates/argon/PHP/visitor_registration.php', {
+        fetch('http://172.20.10.4/coreveilliance/PHP/visitor_registration.php', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

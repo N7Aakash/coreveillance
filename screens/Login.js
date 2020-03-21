@@ -46,7 +46,7 @@ class Login extends React.Component {
         }
         console.log("Password:" + this.state.UserPassword);
 
-        fetch('http://192.168.43.52/ReactTemplates/argon/PHP/singleRead.php', {
+        fetch('http://172.20.10.4/coreveilliance/PHP/singleRead.php', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

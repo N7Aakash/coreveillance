@@ -20,7 +20,7 @@ class Home extends React.Component {
     }
   }
   getTodayVisitorCount=()=>{
-    fetch('http://192.168.43.52/ReactTemplates/argon/PHP/getTodayVisitorsCount.php', {
+    fetch('http://172.20.10.4/coreveilliance/PHP/getTodayVisitorsCount.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -38,7 +38,7 @@ class Home extends React.Component {
     });
   };
   getAnomaliesCount=()=>{
-    fetch('http://192.168.43.52/ReactTemplates/argon/PHP/getAnomaliesCount.php', {
+    fetch('http://172.20.10.4/coreveilliance/PHP/getAnomaliesCount.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -56,7 +56,7 @@ class Home extends React.Component {
     });
   };
   getTotalVisitorCount=()=>{
-    fetch('http://192.168.43.52/ReactTemplates/argon/PHP/getTotalVisitors.php', {
+    fetch('http://172.20.10.4/coreveilliance/PHP/getTotalVisitors.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

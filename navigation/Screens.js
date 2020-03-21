@@ -22,6 +22,8 @@ import AnomalyStatistics from "../screens/AnomalyStatistics";
 import VisitorDetails from "../screens/VisitorDetails";
 import todayVisitor from "../screens/todayVisitor";
 import ManageVisitors from "../screens/ManageVisitors";
+import ManageVisitorDetails from "../screens/ManageVisitorDetails";
+import TodayVisitorDetails from "../screens/TodayVisitorDetails";
 // drawer
 import Menu from "./Menu";
 import DrawerItem from "../components/DrawerItem";
@@ -162,6 +164,15 @@ const HomeStack = createStackNavigator(
               headerTransparent: true
           })
       },
+      ManageVisitorDetails: {
+        screen: ManageVisitorDetails,
+        navigationOptions: ({ navigation }) => ({
+            header: (
+                <Header left={<Block />} white transparent title="" navigation={navigation} />
+            ),
+            headerTransparent: true
+        })
+    },
       todayVisitor: {
           screen: todayVisitor,
           navigationOptions: ({ navigation }) => ({
@@ -171,6 +182,15 @@ const HomeStack = createStackNavigator(
               headerTransparent: true
           })
       },
+      TodayVisitorDetails: {
+        screen: TodayVisitorDetails,
+        navigationOptions: ({ navigation }) => ({
+            header: (
+                <Header left={<Block />} white transparent title="" navigation={navigation} />
+            ),
+            headerTransparent: true
+        })
+    },
       ManageVisitors: {
           screen: ManageVisitors,
           navigationOptions: ({ navigation }) => ({

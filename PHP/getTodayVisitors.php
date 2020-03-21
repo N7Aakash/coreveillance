@@ -6,7 +6,7 @@ $con=$db->getConnection();
 
 $mydate=getdate();
 //echo "$mydate[year]-$mydate[mday]";
-$CheckSQL = "SELECT *,visitor_visiting.created_at as check_in FROM visitor_visiting INNER join visitor on visitor_visiting.visitor_id=visitor.visitor_id where visitor_visiting.created_at like '$mydate[year]-0$mydate[mon]-$mydate[mday]%'";
+$CheckSQL = "SELECT *,visitor_visiting.created_at as check_in FROM visitor_visiting INNER join visitor on visitor_visiting.visitor_id=visitor.visitor_id where visitor_visiting.created_at like '$mydate[year]-0$mydate[mon]-$mydate[mday]%' and visitor_visiting.updated_at is NULL";
 //echo $CheckSQL;
 $results=mysqli_query($con, $CheckSQL);
 //echo mysqli_num_rows($results);
@@ -35,7 +35,7 @@ if (mysqli_num_rows($results) == 0) {
               'email_id' => $email_id,
               'phone_no' => $phone_no,
               'visitor_type_id' => $visitor_type_id,
-//              'image'=>$image,
+              'image'=>$image,
               'date_first_visited'=>$created_at,
               'guard_incharge'=>$created_by,
               'visitor_visiting_flat'=>$visitor_visiting_flat,

@@ -92,7 +92,7 @@ class Register extends React.Component {
       this.props.navigation.navigate("Privacy");
     };
     registerUser = (title, message) =>{
-        fetch('http://192.168.43.52/ReactTemplates/argon/PHP/user_registration.php', {
+        fetch('http://172.20.10.4/coreveilliance/PHP/user_registration.php', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

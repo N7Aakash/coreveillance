@@ -1,11 +1,9 @@
 import React from 'react';
-import { StyleSheet, Dimensions, ScrollView, Alert, Button, View,Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, Dimensions, ScrollView, Alert, Button, View,Text, TouchableOpacity, AsyncStorage} from 'react-native';
 import { Block, theme } from 'galio-framework';
 import argonTheme from "../constants/Theme";
 import {Card} from 'react-native-shadow-cards';
 import {MaterialIcons, MaterialCommunityIcons} from "@expo/vector-icons";
-import registerForPushNotificationsAsync from "./registerForPushNotificationsAsync";
-
 const { width } = Dimensions.get('screen');
 
 class Home extends React.Component {
@@ -16,9 +14,23 @@ class Home extends React.Component {
       todayVisitors: 0,
       totalVisitors: 0,
       totalAnomalies:0,
+      getValue:'DUMMY',
 
-    }
+    };
+      {this.retrieveData("email")}
   }
+
+    async retrieveData(key) {
+        try {
+            const value = await AsyncStorage.getItem(key);
+            if (value !== null) {
+                // We have data!!
+                console.log("Printing at Home: " + value);
+            }
+        } catch (error) {
+            // Error retrieving data
+        }
+    };
   getTodayVisitorCount=()=>{
     fetch('http://172.20.10.4/coreveilliance/PHP/getTodayVisitorsCount.php', {
       method: 'POST',

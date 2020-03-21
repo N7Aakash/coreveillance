@@ -7,9 +7,12 @@ import {
     View,
     KeyboardAvoidingView,
     ScrollView,
-    Alert, Image
+    Alert, Image,
+    AsyncStorage,
+    Text
 } from "react-native";
-import { Block, Checkbox, Text, theme } from "galio-framework";
+
+import { Block, Checkbox , theme } from "galio-framework";
 
 import { Button, Icon, Input } from "../components";
 import { Images, argonTheme } from "../constants";
@@ -27,6 +30,24 @@ class Login extends React.Component {
         }
 
     }
+    async  storeData(data){
+        try {
+            await AsyncStorage.setItem("name", (data['f_name']+ " " + data['l_name']));
+            await AsyncStorage.setItem("email", data['email']);
+            await AsyncStorage.setItem("wing", data['wing']);
+            await AsyncStorage.setItem("flat_no", data['flat_no']);
+            await AsyncStorage.setItem("phone_no", data['phone_number']);
+            await AsyncStorage.setItem("user_role", data['user_role_name']);
+            await AsyncStorage.setItem("user_role_id", data['user_role_id']);
+
+
+        } catch (error) {
+            // Error saving data
+            console.log("error in store data async");
+        }
+        console.log("Data set");
+    };
+
     openRegisterPage = ()=> {
         {  this.props.navigation.navigate("Register")}
     };
@@ -40,7 +61,7 @@ class Login extends React.Component {
             console.log("email" + email);
             requestType=1;
         }else if(flat.length > 0 ){
-            console.log("flat "  + flat);
+            console.log("flat: "  + flat);
             requestType=0;
 
         }
@@ -62,20 +83,18 @@ class Login extends React.Component {
         }).then((response) => response.json())
             .then((responseJson) => {
 
-
-                if(responseJson === "User does Not Exist, Please Login First !!!"){
-                    Alert.alert("User does Not Exist, Please Login First !!!", message);
+                 console.log(responseJson);
+                if(responseJson === "User does Not Exist, Please Register First !!!"){
+                    Alert.alert("User does Not Exist, Please Register First !!!", message);
                 }
-                else if(responseJson === "Password matched"){
+                else if(responseJson === "Password did not matched"){
+                    Alert.alert("Incorrect Password/Email ID/Flat number", message);
+                } else{
+                    {this.storeData(responseJson)}
                     {  this.props.navigation.navigate("Home")}
                 }
-                else if(responseJson === "Password Matching Failed!"){
-                    Alert.alert("Incorrect Password/Email ID", message);
-                }
-                else{
-                    Alert.alert("Incorrect credentials , Try AGAIN",message);
-                }
-                // console.log(responseJson);
+
+
 
 
             }).catch((error) => {
@@ -187,7 +206,8 @@ class Login extends React.Component {
                     </Block>
                 </ImageBackground>
             </Block>
-        );
+        )
+
     }
 }
 

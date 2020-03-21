@@ -12,23 +12,23 @@ $obj = json_decode($json, true);
 $pass=$obj['password'];
 $type=$obj['requestType'];
 
+
 if($type==1){
 $email = $obj['email'];
 $CheckSQL = "SELECT * FROM users WHERE email='$email'";
 }
 else{
 $flat_no = $obj['flat_no'];
-$CheckSQL = "SELECT * FROM users WHERE flat_no='$flat_no'";
+$CheckSQL = "SELECT * FROM users inner join user_role_type on users.user_role_id=user_role_type.user_role_type_id WHERE flat_no='$flat_no'";
 }
 // Executing SQL Query.
+
 $result=mysqli_query($con, $CheckSQL);
 
 
 if (mysqli_num_rows($result)==0) {
-    $EmailExistMSG = 'User does Not Exist, Please Register First !!!';
-   //    var_dump($obj);
-    // Converting the message into JSON format.
-    $EmailExistJson = json_encode($EmailExistMSG);
+
+    $EmailExistJson = json_encode("User does Not Exist, Please Register First !!!");
 
     echo $EmailExistJson;
 
@@ -42,9 +42,28 @@ if (mysqli_num_rows($result)==0) {
 //        echo json_encode("Password matched");
 //    else
 //        echo password_verify($password,password_hash($pass,PASSWORD_BCRYPT));
-    if($password === $pass)
-  echo json_encode("Password matched");
-    else
+    if($password === $pass){
+       $posts_arr = array();
+          $post_item = array(
+                   'user_id' => $user_id,
+                   'user_role_id' => $user_role_id,
+                   'f_name' => $f_name,
+                   'l_name' => $l_name,
+                   'email' => $email,
+                   'phone_number' => $phone_number,
+                   'flat_no'=>$flat_no,
+                   'wing'=>$wing,
+                   'user_role_id'=>$user_role_id,
+                   'user_role_name'=>$user_role_name,
+               );
+
+
+//               array_push($posts_arr, $post_item);
+                 $json = json_encode($post_item);
+
+
+                       echo $json;
+    }else if($password !== $pass)
        echo json_encode("Password did not matched");
 
 }

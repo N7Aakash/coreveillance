@@ -22,8 +22,12 @@ import AnomalyStatistics from "../screens/AnomalyStatistics";
 import VisitorDetails from "../screens/VisitorDetails";
 import todayVisitor from "../screens/todayVisitor";
 import ManageVisitors from "../screens/ManageVisitors";
+
 import ManageVisitorDetails from "../screens/ManageVisitorDetails";
 import TodayVisitorDetails from "../screens/TodayVisitorDetails";
+
+import TestAsync from "../screens/TestAsync";
+
 // drawer
 import Menu from "./Menu";
 import DrawerItem from "../components/DrawerItem";
@@ -297,20 +301,12 @@ const AccountStack = createStackNavigator(
 // d
 const AppStack = createDrawerNavigator(
   {
-      Home: {
-          screen: HomeStack,
-          navigationOptions: navOpt => ({
-              drawerLabel: ({ focused }) => (
-                  <DrawerItem focused={focused} title="Home" />
-              )
-          })
-      },
-        Onboarding: {
-      screen: Onboarding,
-      navigationOptions: {
-        drawerLabel: () => {}
-      }
-    },
+    //     Onboarding: {
+    //   screen: Onboarding,
+    //   navigationOptions: {
+    //     drawerLabel: () => {}
+    //   }
+    // },
 
         Account: {
       screen: AccountStack,
@@ -320,15 +316,22 @@ const AppStack = createDrawerNavigator(
         )
       })
     },
-
-    Profile: {
-      screen: ProfileStack,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Profile" title="Profile" />
-        )
-      })
-    },
+      Home: {
+          screen: HomeStack,
+          navigationOptions: navOpt => ({
+              drawerLabel: ({ focused }) => (
+                  <DrawerItem focused={focused} title="Home" />
+              )
+          })
+      },
+      Profile: {
+          screen: ProfileStack,
+          navigationOptions: navOpt => ({
+              drawerLabel: ({ focused }) => (
+                  <DrawerItem focused={focused} screen="Profile" title="Profile" />
+              )
+          })
+      },
 
     Elements: {
       screen: ElementsStack,

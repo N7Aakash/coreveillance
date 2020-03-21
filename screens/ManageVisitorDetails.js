@@ -12,6 +12,7 @@ import {
 import {Card} from 'react-native-shadow-cards';
 import {Block} from "galio-framework";
 import Modal from 'react-native-modal';
+import Constants from "../constants/Constants";
 class ManageVisitorDetails extends React.Component {
     constructor(props) {
         super(props);
@@ -39,7 +40,7 @@ class ManageVisitorDetails extends React.Component {
         let num_of_pax = this.state.num_of_pax;
         let visitor_id = this.state.visitor_id;
 
-        fetch('http://172.20.10.4/coreveilliance/PHP/visitor_visiting.php', {
+        fetch(Constants.API_PATH+'visitor_visiting.php', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -52,7 +53,7 @@ class ManageVisitorDetails extends React.Component {
                 visitor_id:visitor_id,
             })
 
-        }).then((response) => response.json())
+        }).then((response) => response.text())
             .then((responseJson) => {
 
                 console.log(responseJson);

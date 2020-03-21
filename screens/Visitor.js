@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Block, theme } from 'galio-framework';
 import {Card} from 'react-native-shadow-cards';
+import Constants from "../constants/Constants";
 class Visitor extends React.Component {
     constructor(props) {
         super(props);
@@ -21,7 +22,7 @@ class Visitor extends React.Component {
         console.log("Preesed Visitor Details");
     }
     componentDidMount(){
-        fetch("http://172.20.10.4/coreveilliance/argon/PHP/getVisitors.php")
+        fetch(Constants.API_PATH+'getVisitors.php')
             .then(response => response.json())
             .then((responseJson)=> {
                 this.setState({

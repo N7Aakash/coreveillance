@@ -14,6 +14,7 @@ import { Block, Checkbox, Text, theme } from "galio-framework";
 import { Button, Icon, Input } from "../components";
 import { Images, argonTheme } from "../constants";
 import Register from "../screens/Register";
+import Constants from "../constants/Constants";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -31,7 +32,7 @@ class Login extends React.Component {
     };
     getData = (title, message) =>{
 
-        fetch('http://192.168.43.52/ReactTemplates/argon/PHP/singleRead.php', {
+        fetch(Constants.API_PATH+'singleRead.php', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

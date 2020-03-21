@@ -23,6 +23,7 @@ import registerForPushNotificationsAsync from "./registerForPushNotificationsAsy
 import { FontAwesome, MaterialIcons,MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Permissions from "expo-permissions";
 import {Notifications} from "expo";
+import Constants from "../constants/Constants";
 const { width, height } = Dimensions.get("screen");
 
 class RegisterVisitor extends React.Component {
@@ -46,7 +47,7 @@ class RegisterVisitor extends React.Component {
 
 
     registerUser = (title, message) =>{
-        fetch('http://172.20.10.4/coreveilliance/PHP/visitor_registration.php', {
+        fetch(Constants.API_PATH+'visitor_registration.php', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

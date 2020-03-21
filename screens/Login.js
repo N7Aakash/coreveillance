@@ -1,4 +1,5 @@
 import React from "react";
+import Constants from "../constants/Constants";
 import {
     StyleSheet,
     ImageBackground,
@@ -67,7 +68,7 @@ class Login extends React.Component {
         }
         console.log("Password:" + this.state.UserPassword);
 
-        fetch('http://172.20.10.4/coreveilliance/PHP/singleRead.php', {
+        fetch(Constants.API_PATH+'singleRead.php', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

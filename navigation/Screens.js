@@ -301,12 +301,12 @@ const AccountStack = createStackNavigator(
 // d
 const AppStack = createDrawerNavigator(
   {
-    //     Onboarding: {
-    //   screen: Onboarding,
-    //   navigationOptions: {
-    //     drawerLabel: () => {}
-    //   }
-    // },
+        Onboarding: {
+      screen: Onboarding,
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
+    },
 
         Account: {
       screen: AccountStack,

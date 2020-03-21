@@ -12,6 +12,7 @@ import {
 import {Card} from 'react-native-shadow-cards';
 import {Block} from "galio-framework";
 import Modal from 'react-native-modal';
+import Constants from "../constants/Constants";
 class TodayVisitorDetails extends React.Component {
     constructor(props) {
         super(props);
@@ -24,7 +25,7 @@ class TodayVisitorDetails extends React.Component {
     updateVisitorDetails = () => {
         let visitor_id = this.props.navigation.state.params.visitor_id;
 
-        fetch('http://172.20.10.4/coreveilliance/PHP/update_visitor_visiting.php', {
+        fetch(Constants.API_PATH+'update_visitor_visiting.php', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Block, theme } from 'galio-framework';
 import {Card} from 'react-native-shadow-cards';
+import Constants from "../constants/Constants";
 class todayVisitor extends React.Component {
     constructor(props) {
         super(props);
@@ -18,19 +19,19 @@ class todayVisitor extends React.Component {
         };
     }
     componentDidMount(){
-        fetch('http://192.168.43.52/ReactTemplates/argon/PHP/getTodayVisitors.php', {
+        fetch(Constants.API_PATH+'/getTodayVisitors.php', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-        }).then((response) => response.text())
+        }).then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
                     loading: false,
                     dataSource: responseJson
                 });
-                 console.log(responseJson);
+                console.log(responseJson);
 
             }).catch((error) => {
             console.error(error);
@@ -46,26 +47,34 @@ class todayVisitor extends React.Component {
             />
         );
     }
-    renderItem=(data)=>
+    renderItem(item){
+        console.log(item);
+        return(
+            <Card style={{padding: 10, margin: 10}}>
+                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate("TodayVisitorDetails",{
+                    visitor_id:item.visitor_id,
+                    name:item.f_name + " " + item.l_name,
+                    email:item.email_id,
+                    phone:item.phone_no,
+                    image:item.image,
+                    visitor_type:item.visitor_type_id,
+                })}>
+                    <Block style={{flexDirection:'row',justifyContent:'space-around',alignContent:'center', paddingVertical:'2%'}}>
 
+                        <View>
+                            <Image source={{uri: `data:image;base64,${item.image}`}} style={styles.logo}/>
+                        </View>
+                        <View>
 
-        <Card style={{padding: 10, margin: 10}}>
-            <TouchableWithoutFeedback>
-                <Block style={{flexDirection:'row',justifyContent:'space-around',alignContent:'center', paddingVertical:'2%'}}>
+                            <Text style={styles.item}>{item.f_name + " " + item.l_name }</Text>
+                            <Text style={styles.item}>{item.email_id}</Text>
+                            <Text style={styles.item}>{item.phone_no}</Text>
 
-                    <View>
-                        <Image source={{uri: `data:image;base64,${data.item.image}`}} style={styles.logo}/>
-                    </View>
-                    <View>
-
-                        <Text style={styles.item}>{data.item.f_name + " " + data.item.l_name }</Text>
-                        <Text style={styles.item}>{data.item.email_id}</Text>
-                        <Text style={styles.item}>{data.item.phone_no}</Text>
-
-                    </View>
-                </Block>
-            </TouchableWithoutFeedback>
-        </Card>;
+                        </View>
+                    </Block>
+                </TouchableWithoutFeedback>
+            </Card>);
+    }
 
     render(){
         if(this.state.loading){
@@ -79,13 +88,13 @@ class todayVisitor extends React.Component {
                 <Card style={{padding: 10, margin: 10}}>
                     <Text style={{textAlign:'center'}}>Today  Visitors</Text>
                 </Card>
-                {/*<FlatList*/}
+                <FlatList
 
-                {/*    data= {this.state.dataSource}*/}
-                {/*    ItemSeparatorComponent = {this.FlatListItemSeparator}*/}
-                {/*    renderItem= {item=> this.renderItem(item)}*/}
-                {/*    keyExtractor= {item=>item.email_id+""}*/}
-                {/*/>*/}
+                    data= {this.state.dataSource}
+                    ItemSeparatorComponent = {this.FlatListItemSeparator}
+                    renderItem={({item}) => this.renderItem(item)}
+                    keyExtractor= {item=>item.email_id+""}
+                />
                 <Text>HI</Text>
             </View>
         )}

@@ -17,6 +17,7 @@ import { Block, theme } from 'galio-framework';
 import { Card } from '../components';
 import articles from '../constants/articles';
 import {argonTheme} from "../constants";
+import Constants from "../constants/Constants";
 const { width } = Dimensions.get('screen');
 
 class Anomaly extends React.Component {
@@ -29,7 +30,7 @@ class Anomaly extends React.Component {
         }
     }
    async getData(){
-        let response = await fetch( "http://172.20.10.4/coreveilliance/PHP/image_get.php");
+        let response =  fetch(Constants.API_PATH+'image_get.php');
         let responseJson = await response.json();
        // console.log(responseJson);
         console.log("Images : " + JSON.stringify(responseJson));

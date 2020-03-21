@@ -4,6 +4,7 @@ import { Block, theme } from 'galio-framework';
 import argonTheme from "../constants/Theme";
 import {Card} from 'react-native-shadow-cards';
 import {MaterialIcons, MaterialCommunityIcons} from "@expo/vector-icons";
+import Constants from "../constants/Constants";
 const { width } = Dimensions.get('screen');
 
 class Home extends React.Component {
@@ -32,7 +33,7 @@ class Home extends React.Component {
         }
     };
   getTodayVisitorCount=()=>{
-    fetch('http://172.20.10.4/coreveilliance/PHP/getTodayVisitorsCount.php', {
+      fetch(Constants.API_PATH+'getTodayVisitorsCount.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -50,7 +51,7 @@ class Home extends React.Component {
     });
   };
   getAnomaliesCount=()=>{
-    fetch('http://172.20.10.4/coreveilliance/PHP/getAnomaliesCount.php', {
+      fetch(Constants.API_PATH+'getAnomaliesCount.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -68,7 +69,7 @@ class Home extends React.Component {
     });
   };
   getTotalVisitorCount=()=>{
-    fetch('http://172.20.10.4/coreveilliance/PHP/getTotalVisitors.php', {
+      fetch(Constants.API_PATH+'getTotalVisitors.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

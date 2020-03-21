@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Block, theme } from 'galio-framework';
 import {Card} from 'react-native-shadow-cards';
+import Constants from "../constants/Constants";
 class ManageVisitors extends React.Component {
     constructor(props) {
         super(props);
@@ -19,7 +20,7 @@ class ManageVisitors extends React.Component {
     }
     
     componentDidMount(){
-        fetch('http://172.20.10.4/coreveilliance/PHP/getFrequentVisitors.php', {
+        fetch(Constants.API_PATH+'getFrequentVisitors.php', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -31,7 +32,7 @@ class ManageVisitors extends React.Component {
                     loading: false,
                     dataSource: responseJson
                 });
-                console.log(responseJson);
+                //console.log(responseJson);
 
             }).catch((error) => {
             console.error(error);
@@ -95,7 +96,7 @@ class ManageVisitors extends React.Component {
                     renderItem={({item}) => this.renderItem(item)}
                     keyExtractor= {item=>item.visitor_id+""}
                 />
-                <Text>HI</Text>
+
             </View>
         )}
 }

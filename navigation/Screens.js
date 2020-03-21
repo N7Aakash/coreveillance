@@ -25,6 +25,7 @@ import ManageVisitors from "../screens/ManageVisitors";
 
 import ManageVisitorDetails from "../screens/ManageVisitorDetails";
 import TodayVisitorDetails from "../screens/TodayVisitorDetails";
+import Logout from "../screens/Logout";
 
 import TestAsync from "../screens/TestAsync";
 
@@ -279,6 +280,12 @@ const AccountStack = createStackNavigator(
           headerTransparent: true
         })
       },
+        Logout: {
+            screen: Logout,
+            navigationOptions: ({ navigation }) => ({
+                headerTransparent: true
+            })
+        },
       Register: {
         screen: Register,
         navigationOptions: ({navigation}) => ({
@@ -312,7 +319,7 @@ const AppStack = createDrawerNavigator(
       screen: AccountStack,
       navigationOptions: navOpt => ({
         drawerLabel: ({ focused }) => (
-            <DrawerItem focused={focused} screen="Login" title="Account" />
+            <DrawerItem focused={focused} screen="Logout" title="Account" />
         )
       })
     },

@@ -19,7 +19,7 @@ $CheckSQL = "SELECT * FROM users WHERE email='$email'";
 }
 else{
 $flat_no = $obj['flat_no'];
-$CheckSQL = "SELECT * FROM users WHERE flat_no='$flat_no'";
+$CheckSQL = "SELECT * FROM users inner join user_role_type on users.user_role_id=user_role_type.user_role_type_id WHERE flat_no='$flat_no'";
 }
 // Executing SQL Query.
 
@@ -51,7 +51,10 @@ if (mysqli_num_rows($result)==0) {
                    'l_name' => $l_name,
                    'email' => $email,
                    'phone_number' => $phone_number,
-                   'flat_no'=>$flat_no
+                   'flat_no'=>$flat_no,
+                   'wing'=>$wing,
+                   'user_role_id'=>$user_role_id,
+                   'user_role_name'=>$user_role_name,
                );
 
 

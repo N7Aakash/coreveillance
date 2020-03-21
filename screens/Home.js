@@ -25,7 +25,7 @@ class Home extends React.Component {
             const value = await AsyncStorage.getItem(key);
             if (value !== null) {
                 // We have data!!
-                console.log(value);
+                console.log("Printing at Home: " + value);
             }
         } catch (error) {
             // Error retrieving data

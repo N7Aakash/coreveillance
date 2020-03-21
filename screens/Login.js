@@ -30,14 +30,21 @@ class Login extends React.Component {
         }
 
     }
-    async  storeData(key,data){
+    async  storeData(data){
         try {
-            await AsyncStorage.setItem(key, data['f_name']);
+            await AsyncStorage.setItem("name", (data['f_name']+ " " + data['l_name']));
+            await AsyncStorage.setItem("email", data['email']);
+            await AsyncStorage.setItem("wing", data['wing']);
+            await AsyncStorage.setItem("flat_no", data['flat_no']);
+            await AsyncStorage.setItem("phone_no", data['phone_number']);
+            await AsyncStorage.setItem("user_role", data['user_role_name']);
+            await AsyncStorage.setItem("user_role_id", data['user_role_id']);
+
+
         } catch (error) {
             // Error saving data
-            console.log("test async");
+            console.log("error in store data async");
         }
-        console.log(this.state.UserEmail);
         console.log("Data set");
     };
 
@@ -83,7 +90,7 @@ class Login extends React.Component {
                 else if(responseJson === "Password did not matched"){
                     Alert.alert("Incorrect Password/Email ID/Flat number", message);
                 } else{
-                    {this.storeData("email",responseJson)}
+                    {this.storeData(responseJson)}
                     {  this.props.navigation.navigate("Home")}
                 }
 

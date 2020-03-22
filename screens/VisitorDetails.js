@@ -18,10 +18,14 @@ class VisitorDetails extends React.Component {
         };
        // console.log(this.props.navigation.state.params.name);
     }
-
+    openVisitorHistory=()=>{
+        this.props.navigation.navigate("VisitorHistory", {
+            visitor_id:this.props.navigation.state.params.visitor_id,
+        })
+    };
     render(){
         let visitor_type;
-        console.log(this.props.navigation.state.params.visitor_type);
+       // console.log(this.props.navigation.state.params.visitor_type);
         if(this.props.navigation.state.params.visitor_type  === '1')
              visitor_type="NEW VISITOR";
         else
@@ -47,7 +51,7 @@ class VisitorDetails extends React.Component {
                             </View>
                             </Block>
                     </Card>
-                    <Button  style={[styles.button, {backgroundColor:argonTheme.COLORS.WARNING, marginLeft:115} ]} >Visiting History</Button>
+                    <Button  style={[styles.button, {backgroundColor:argonTheme.COLORS.WARNING, marginLeft:115} ]} onPress={this.openVisitorHistory} >Visiting History</Button>
 
 
                 </Card>

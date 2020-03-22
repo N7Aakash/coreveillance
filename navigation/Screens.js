@@ -25,6 +25,7 @@ import ManageVisitors from "../screens/ManageVisitors";
 
 import ManageVisitorDetails from "../screens/ManageVisitorDetails";
 import TodayVisitorDetails from "../screens/TodayVisitorDetails";
+import VisitorHistory from "../screens/VisitorHistory";
 import Logout from "../screens/Logout";
 
 import TestAsync from "../screens/TestAsync";
@@ -162,6 +163,15 @@ const HomeStack = createStackNavigator(
       },
       VisitorDetails: {
           screen: VisitorDetails,
+          navigationOptions: ({ navigation }) => ({
+              header: (
+                  <Header left={<Block />} white transparent title="" navigation={navigation} />
+              ),
+              headerTransparent: true
+          })
+      },
+      VisitorHistory: {
+          screen: VisitorHistory,
           navigationOptions: ({ navigation }) => ({
               header: (
                   <Header left={<Block />} white transparent title="" navigation={navigation} />

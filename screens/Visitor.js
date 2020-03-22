@@ -30,7 +30,7 @@ class Visitor extends React.Component {
                     loading: false,
                     dataSource: responseJson
                 })
-                console.log(responseJson);
+              //  console.log(responseJson);
             })
             .catch(error=>console.log(error)) //to catch the errors if any
     }
@@ -57,6 +57,7 @@ class Visitor extends React.Component {
                 guard_incharge:data.item.guard_incharge,
                 date_first_visited:data.item.date_first_visited,
                 visitor_type:data.item.visitor_type_id,
+                visitor_id:data.item.visitor_id,
             })}>
             <Block style={{flexDirection:'row',justifyContent:'space-around',alignContent:'center', paddingVertical:'2%'}}>
 

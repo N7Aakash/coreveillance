@@ -7,13 +7,14 @@ import {
     Text,
     Alert,
     TextInput,
-    TouchableOpacity, Image, TouchableWithoutFeedback
+    TouchableOpacity, Image, TouchableWithoutFeedback, Dimensions
 } from "react-native";
 import {Card} from 'react-native-shadow-cards';
 import {Block,Button} from "galio-framework";
 import Modal from 'react-native-modal';
 import Constants from "../constants/Constants";
 import {argonTheme} from "../constants";
+const { width, height } = Dimensions.get("screen");
 class TodayVisitorDetails extends React.Component {
     constructor(props) {
         super(props);
@@ -89,7 +90,7 @@ class TodayVisitorDetails extends React.Component {
 
 
                 </Card>
-                <Button  style={[styles.button, {backgroundColor:argonTheme.COLORS.WARNING, marginLeft:150} ]} middle onPress={this.updateVisitorDetails} >Check-in</Button>
+                <Button  style={[styles.button, {backgroundColor:argonTheme.COLORS.WARNING, marginLeft:150} ]} middle onPress={this.updateVisitorDetails} >Check-out</Button>
                 
          </View>
         );

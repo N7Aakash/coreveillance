@@ -27,11 +27,15 @@ class todayVisitor extends React.Component {
             },
         }).then((response) => response.json())
             .then((responseJson) => {
-                this.setState({
-                    loading: false,
-                    dataSource: responseJson
-                });
-                console.log(responseJson);
+                if(responseJson === "No Visitor ! Please enter some Visitors for display ")
+                    console.log(responseJson);
+                else {
+                    this.setState({
+                        loading: false,
+                        dataSource: responseJson
+                    });
+                }
+
 
             }).catch((error) => {
             console.error(error);
@@ -76,7 +80,15 @@ class todayVisitor extends React.Component {
             </Card>);
     }
 
-    render(){
+    render() {
+        if (this.state.dataSource.length === 0) {
+            return (
+                <Card style={{padding: 10, margin: 10}}>
+                    <Text style={{textAlign:'center'}}>No Visited have been checked-in today!</Text>
+                </Card>
+            )
+        }
+        else{
         if(this.state.loading){
             return(
                 <View style={styles.loader}>
@@ -97,7 +109,8 @@ class todayVisitor extends React.Component {
                 />
                 <Text>HI</Text>
             </View>
-        )}
+        )}}
+
 }
 const styles = StyleSheet.create({
     container: {

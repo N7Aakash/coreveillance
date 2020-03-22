@@ -5,10 +5,12 @@ import {
     ActivityIndicator,
     FlatList,
     Text,
-    TouchableOpacity, Image, Button, TouchableWithoutFeedback
+    TouchableOpacity, Image, TouchableWithoutFeedback, Dimensions
 } from "react-native";
 import {Card} from 'react-native-shadow-cards';
-import {Block} from "galio-framework";
+import {Block,Button} from "galio-framework";
+import {argonTheme} from "../constants";
+const { width, height } = Dimensions.get("screen");
 class VisitorDetails extends React.Component {
     constructor(props) {
         super(props);
@@ -27,8 +29,8 @@ class VisitorDetails extends React.Component {
         return (
             <View style={styles.container}>
                 <Card style={styles.mainCard}>
-                    <Card style={{padding: 10, margin: 10}}>
-                        <Text style={{textAlign:'center'}}>VISITOR DETAILS</Text>
+                    <Card style={{padding: 10, margin: 10, backgroundColor:argonTheme.COLORS.WARNING}}>
+                        <Text style={{textAlign:'center', color:'white'}}>VISITOR DETAILS</Text>
                     </Card>
                     <Card style={{padding: 10, margin: 10}}>
                         <Block style={{justifyContent:'center',paddingLeft:42, paddingVertical:'2%'}}>
@@ -45,6 +47,7 @@ class VisitorDetails extends React.Component {
                             </View>
                             </Block>
                     </Card>
+                    <Button  style={[styles.button, {backgroundColor:argonTheme.COLORS.WARNING, marginLeft:115} ]} >Visiting History</Button>
 
 
                 </Card>
@@ -67,6 +70,11 @@ const styles = StyleSheet.create({
         paddingHorizontal:'2%',
 
 
+    },
+    button:{
+        width: 140,
+        height: 50,
+        marginTop: 15,
     }
 });
 

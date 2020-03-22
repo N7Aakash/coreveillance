@@ -10,6 +10,7 @@ import {
 import { Block, theme } from 'galio-framework';
 import {Card} from 'react-native-shadow-cards';
 import Constants from "../constants/Constants";
+import {argonTheme} from "../constants";
 class Visitor extends React.Component {
     constructor(props) {
         super(props);
@@ -36,9 +37,10 @@ class Visitor extends React.Component {
     FlatListItemSeparator = () => {
         return (
             <View style={{
-                height: .5,
-                width:"100%",
-                backgroundColor:"rgba(0,0,0,0.5)",
+                height: .5 * 2,
+                width:"90%",
+                marginLeft:"3%",
+                backgroundColor:argonTheme.COLORS.WARNING,
             }}
             />
         );
@@ -81,8 +83,8 @@ class Visitor extends React.Component {
             )}
         return(
             <View style={styles.container}>
-                <Card style={{padding: 10, margin: 10}}>
-                <Text style={{textAlign:'center'}}>All Time Visitors</Text>
+                <Card style={{padding: 10, margin: 10,  backgroundColor: argonTheme.COLORS.WARNING}}>
+                    <Text style={{textAlign:'center',color:'white'}}>All Time Visitors</Text>
                 </Card>
                 <FlatList
 

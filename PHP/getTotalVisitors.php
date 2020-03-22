@@ -6,7 +6,7 @@ $con=$db->getConnection();
 
 $mydate=getdate();
 //echo "$mydate[year]-$mydate[mday]";
-$CheckSQL = "SELECT count(*) as cnt FROM visitor_visiting";
+$CheckSQL = "SELECT count(*) as cnt FROM visitor";
 //echo $CheckSQL;
 $results=mysqli_query($con, $CheckSQL);
 //echo mysqli_num_rows($results);

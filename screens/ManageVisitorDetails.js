@@ -87,8 +87,8 @@ class ManageVisitorDetails extends React.Component {
         return (
             <View style={styles.container}>
                 <Card style={styles.mainCard}>
-                    <Card style={{padding: 10, margin: 10}}>
-                        <Text style={{textAlign:'center'}}>VISITOR DETAILS</Text>
+                    <Card style={{padding: 10, margin: 10, backgroundColor:argonTheme.COLORS.WARNING}}>
+                        <Text style={{textAlign:'center',color:'white'}}>VISITOR DETAILS</Text>
                     </Card>
                     <Card style={{padding: 10, margin: 10}}>
                         <Block style={{justifyContent:'center',paddingLeft:42, paddingVertical:'2%'}}>

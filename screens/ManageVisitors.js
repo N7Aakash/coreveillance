@@ -5,7 +5,7 @@ import {
     ActivityIndicator,
     FlatList,
     Text,
-    TouchableOpacity, Image, TouchableWithoutFeedback,
+    ScrollView, Image, TouchableWithoutFeedback,
 } from "react-native";
 import { Block, theme } from 'galio-framework';
 import {Card} from 'react-native-shadow-cards';
@@ -16,10 +16,11 @@ class ManageVisitors extends React.Component {
         super(props);
         this.state = {
             loading: true,
-            dataSource:[]
+            dataSource:[],
+            dataSourceNonFrequent:[],
         };
     }
-    
+
     componentDidMount(){
         fetch(Constants.API_PATH+'getFrequentVisitors.php', {
             method: 'POST',
@@ -34,6 +35,24 @@ class ManageVisitors extends React.Component {
                     dataSource: responseJson
                 });
                 //console.log(responseJson);
+
+            }).catch((error) => {
+            console.error(error);
+        });
+
+        fetch(Constants.API_PATH+'getNonFrequentVisitors.php', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    // loading: false,
+                    dataSourceNonFrequent:responseJson,
+                });
+                // console.log(responseJson);
 
             }).catch((error) => {
             console.error(error);
@@ -53,30 +72,30 @@ class ManageVisitors extends React.Component {
     renderItem(item){
         console.log(item);
         return(
-        <Card style={{padding: 10, margin: 10}}>
-            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate("ManageVisitorDetails",{
-                visitor_id:item.visitor_id,
-                name:item.f_name + " " + item.l_name,
-                email:item.email_id,
-                phone:item.phone_no,
-                image:item.image,
-                visitor_type:item.visitor_type_id,
-            })}>
-                <Block style={{flexDirection:'row',justifyContent:'space-around',alignContent:'center', paddingVertical:'2%'}}>
+            <Card style={{padding: 10, margin: 10}}>
+                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate("ManageVisitorDetails",{
+                    visitor_id:item.visitor_id,
+                    name:item.f_name + " " + item.l_name,
+                    email:item.email_id,
+                    phone:item.phone_no,
+                    image:item.image,
+                    visitor_type:item.visitor_type_id,
+                })}>
+                    <Block style={{flexDirection:'row',justifyContent:'space-around',alignContent:'center', paddingVertical:'2%'}}>
 
-                    <View>
-                        <Image source={{uri: `data:image;base64,${item.image}`}} style={styles.logo}/>
-                    </View>
-                    <View>
+                        <View>
+                            <Image source={{uri: `data:image;base64,${item.image}`}} style={styles.logo}/>
+                        </View>
+                        <View>
 
-                        <Text style={styles.item}>{item.f_name + " " + item.l_name }</Text>
-                        <Text style={styles.item}>{item.email_id}</Text>
-                        <Text style={styles.item}>{item.phone_no}</Text>
+                            <Text style={styles.item}>{item.f_name + " " + item.l_name }</Text>
+                            <Text style={styles.item}>{item.email_id}</Text>
+                            <Text style={styles.item}>{item.phone_no}</Text>
 
-                    </View>
-                </Block>
-            </TouchableWithoutFeedback>
-        </Card>);
+                        </View>
+                    </Block>
+                </TouchableWithoutFeedback>
+            </Card>);
     }
 
     render(){
@@ -88,17 +107,28 @@ class ManageVisitors extends React.Component {
             )}
         return(
             <View style={styles.container}>
-                <Card style={{padding: 10, margin: 10,  backgroundColor: argonTheme.COLORS.WARNING}}>
-                    <Text style={{textAlign:'center',color:'white'}}>Manage  Visitors</Text>
-                </Card>
-                <FlatList
+                <ScrollView>
+                    <Card style={{padding: 10, margin: 10,  backgroundColor: argonTheme.COLORS.WARNING}}>
+                        <Text style={{textAlign:'center',color:'white'}}>Manage Frequent  Visitors</Text>
+                    </Card>
+                    <FlatList
 
-                    data= {this.state.dataSource}
-                    ItemSeparatorComponent = {this.FlatListItemSeparator}
-                    renderItem={({item}) => this.renderItem(item)}
-                    keyExtractor= {item=>item.visitor_id+""}
-                />
+                        data= {this.state.dataSource}
+                        ItemSeparatorComponent = {this.FlatListItemSeparator}
+                        renderItem={({item}) => this.renderItem(item)}
+                        keyExtractor= {item=>item.visitor_id+""}
+                    />
+                    <Card style={{padding: 10, margin: 10,  backgroundColor: argonTheme.COLORS.WARNING}}>
+                        <Text style={{textAlign:'center',color:'white'}}>Manage Non Frequent Visitors</Text>
+                    </Card>
+                    <FlatList
 
+                        data= {this.state.dataSourceNonFrequent}
+                        ItemSeparatorComponent = {this.FlatListItemSeparator}
+                        renderItem={({item}) => this.renderItem(item)}
+                        keyExtractor= {item=>item.visitor_id+""}
+                    />
+                </ScrollView>
             </View>
         )}
 }

@@ -26,7 +26,7 @@ class VisitorDetails extends React.Component {
     render(){
         let visitor_type;
        // console.log(this.props.navigation.state.params.visitor_type);
-        if(this.props.navigation.state.params.visitor_type  === '1')
+        if(this.props.navigation.state.params.visitor_type  === '2')
              visitor_type="NEW VISITOR";
         else
              visitor_type="FREQUENT VISITOR";

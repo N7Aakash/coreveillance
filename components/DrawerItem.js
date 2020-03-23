@@ -61,8 +61,10 @@ class DrawerItem extends React.Component {
         );
       case "Getting Started":
         return <Icon />;
-      case "Log out":
-        return <Icon />;
+      case "Logout":
+        return (
+            <MaterialCommunityIcons style={styles.inputIcons} name="logout" size={20}  color={focused ? "white" : argonTheme.COLORS.LABEL} />
+        );
       default:
         return null;
     }

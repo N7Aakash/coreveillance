@@ -290,12 +290,7 @@ const AccountStack = createStackNavigator(
           headerTransparent: true
         })
       },
-        Logout: {
-            screen: Logout,
-            navigationOptions: ({ navigation }) => ({
-                headerTransparent: true
-            })
-        },
+
       Register: {
         screen: Register,
         navigationOptions: ({navigation}) => ({
@@ -315,6 +310,26 @@ const AccountStack = createStackNavigator(
     }
 );
 
+const LogoutStack = createStackNavigator(
+    {
+        Login: {
+            screen: Logout,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <Header left={<Block />} white transparent title="" navigation={navigation} />
+                ),
+                headerTransparent: true
+            })
+        },
+
+    },
+    {
+        cardStyle: { backgroundColor: "#FFFFFF" },
+        transitionConfig
+    }
+);
+
+
 // d
 const AppStack = createDrawerNavigator(
   {
@@ -324,12 +339,18 @@ const AppStack = createDrawerNavigator(
         drawerLabel: () => {}
       }
     },
+      Account: {
+          screen: AccountStack,
+          navigationOptions: {
+              drawerLabel: () => {}
+          }
+      },
 
-        Account: {
-      screen: AccountStack,
+        Logout: {
+      screen: LogoutStack,
       navigationOptions: navOpt => ({
         drawerLabel: ({ focused }) => (
-            <DrawerItem focused={focused} screen="Logout" title="Account" />
+            <DrawerItem focused={focused} screen="Logout" title="Logout" />
         )
       })
     },

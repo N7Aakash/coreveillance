@@ -23,12 +23,12 @@ class Card extends React.Component {
 
     return (
         <Block row={horizontal} card flex style={cardContainer}>
-          <TouchableWithoutFeedback onPress={() => navigation.navigate('AnomalyDetail')}>
+          <TouchableWithoutFeedback onPress={() => navigation.navigate('AnomalyNotisDetail')}>
             <Block flex style={imgContainer}>
               <Image source={{uri: `data:image;base64,${image}`}} style={styles.logo}/>
             </Block>
           </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={() => navigation.navigate('AnomalyDetail')}>
+          <TouchableWithoutFeedback onPress={() => navigation.navigate('AnomalyNotisDetail')}>
             <Block flex space="between" style={styles.cardDescription}>
               <Text size={14} style={styles.cardTitle}>hi</Text>
               <Text size={12} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>{item.cta}</Text>

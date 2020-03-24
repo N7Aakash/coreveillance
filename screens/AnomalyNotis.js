@@ -20,7 +20,7 @@ import {argonTheme} from "../constants";
 import Constants from "../constants/Constants";
 const { width } = Dimensions.get('screen');
 
-class Anomaly extends React.Component {
+class AnomalyNotis extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -67,7 +67,7 @@ componentWillMount() {
         ];
         return(
             <Block  card flex style={cardContainer}>
-                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('AnomalyDetail',{
+                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('AnomalyNotisDetail',{
                     anomaly_type_text: data.item.anomaly_type_text,
                     anomaly_title:data.item.anomaly_title,
                     anomaly_text:data.item.anomaly_text,
@@ -153,4 +153,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Anomaly;
+export default AnomalyNotis;

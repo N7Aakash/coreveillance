@@ -11,7 +11,7 @@ import { Block } from "galio-framework";
 // screens
 import Home from "../screens/Home";
 import Onboarding from "../screens/Onboarding";
-import AnomalyDetail from "../screens/AnomalyDetail";
+import AnomalyNotisDetail from "../screens/AnomalyNotisDetail";
 import Profile from "../screens/Profile";
 import Login from "../screens/Login";
 import Elements from "../screens/Elements";
@@ -27,7 +27,8 @@ import ManageVisitorDetails from "../screens/ManageVisitorDetails";
 import TodayVisitorDetails from "../screens/TodayVisitorDetails";
 import VisitorHistory from "../screens/VisitorHistory";
 import Logout from "../screens/Logout";
-
+import Anomalies from "../screens/Anomalies";
+import AnomalyDetail from "../screens/AnomalyDetail";
 import TestAsync from "../screens/TestAsync";
 
 // drawer
@@ -38,7 +39,7 @@ import DrawerItem from "../components/DrawerItem";
 import Header from "../components/Header";
 import Register from "../screens/Register";
 import Privacy from "../screens/Privacy";
-import AnomalyNotis from "../screens/Anomaly";
+import AnomalyNotis from "../screens/AnomalyNotis";
 
 import PicCamera from "../screens/PicCamera";
 
@@ -274,12 +275,28 @@ const AnomalyStack = createStackNavigator(
           header: <Header search options title="Anomaly Alert" navigation={navigation}/>
         })
       },
-        AnomalyDetail: {
-            screen: AnomalyDetail,
+        AnomalyNotisDetail: {
+            screen: AnomalyNotisDetail,
             navigationOptions: ({ navigation }) => ({
                 headerTransparent: true
             })
         },
+        Anomalies: {
+            screen: Anomalies,
+            navigationOptions: ({navigation}) => ({
+                header: <Header search options title="Anomalies" navigation={navigation}/>
+            })
+        },
+        AnomalyDetail: {
+            screen: AnomalyDetail,
+            navigationOptions: ({ navigation }) => ({
+                header: (
+                    <Header left={<Block />} white transparent title="" navigation={navigation} />
+                ),
+                headerTransparent: true
+            })
+        },
+
     }
 );
 const AccountStack = createStackNavigator(
@@ -333,6 +350,7 @@ const LogoutStack = createStackNavigator(
 // d
 const AppStack = createDrawerNavigator(
   {
+
         Onboarding: {
       screen: Onboarding,
       navigationOptions: {
@@ -387,7 +405,7 @@ const AppStack = createDrawerNavigator(
         )
       })
     },
-      Anomaly: {
+      AnomalyStack: {
           screen: AnomalyStack,
           navigationOptions: navOpt => ({
               drawerLabel: ({ focused }) => (
@@ -395,6 +413,7 @@ const AppStack = createDrawerNavigator(
               )
           })
       },
+
   },
   Menu
 );

@@ -14,7 +14,7 @@ const { height, width } = Dimensions.get('window');
 const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 || height === 896 || width === 896);
 
 const BellButton = ({isWhite, style, navigation}) => (
-  <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('AnomalyDetail')}>
+  <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('AnomalyNotisDetail')}>
     <Icon
       family="ArgonExtra"
       size={16}
@@ -26,7 +26,7 @@ const BellButton = ({isWhite, style, navigation}) => (
 );
 
 const BasketButton = ({isWhite, style, navigation}) => (
-  <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('AnomalyDetail')}>
+  <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('AnomalyNotisDetail')}>
     <Icon
       family="ArgonExtra"
       size={16}
@@ -37,7 +37,7 @@ const BasketButton = ({isWhite, style, navigation}) => (
 );
 
 const SearchButton = ({isWhite, style, navigation}) => (
-  <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('AnomalyDetail')}>
+  <TouchableOpacity style={[styles.button, style]} onPress={() => navigation.navigate('AnomalyNotisDetail')}>
     <Icon
       size={16}
       family="Galio"
@@ -50,14 +50,13 @@ const SearchButton = ({isWhite, style, navigation}) => (
 class Header extends React.Component {
 
   componentDidMount() {
-    console.log("hi");
     registerForPushNotificationsAsync();
     Notifications.addListener((notification) => {
       const { data: { text }, origin,route } = notification;
       console.log("hi");
       if (origin === 'received'  ) {
         Alert.alert(
-            'Anomaly Detected!!!',
+            'AnomalyNotis Detected!!!',
             'There is a anomaly detected, CHECK NOW!!',
             [
               {
@@ -77,7 +76,7 @@ class Header extends React.Component {
     });
   }
   handler = () => {
-    this.props.navigation.navigate("Anomaly");
+    this.props.navigation.navigate("AnomalyNotis");
   };
 
   handleLeftPress = () => {
@@ -149,7 +148,7 @@ class Header extends React.Component {
         style={styles.search}
         placeholder="What are you looking for?"
         placeholderTextColor={'#8898AA'}
-        onFocus={() => navigation.navigate('AnomalyDetail')}
+        onFocus={() => navigation.navigate('AnomalyNotisDetail')}
         iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
       />
     );
@@ -159,13 +158,13 @@ class Header extends React.Component {
 
     return (
       <Block row style={styles.options}>
-        <Button shadowless style={[styles.tab, styles.divider]} onPress={() => navigation.navigate('AnomalyDetail')}>
+        <Button shadowless style={[styles.tab, styles.divider]} onPress={() => navigation.navigate('AnomalyNotisDetail')}>
           <Block row middle>
             <Icon name="diamond" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON} />
             <Text size={16} style={styles.tabTitle}>{optionLeft || 'Beauty'}</Text>
           </Block>
         </Button>
-        <Button shadowless style={styles.tab} onPress={() => navigation.navigate('AnomalyDetail')}>
+        <Button shadowless style={styles.tab} onPress={() => navigation.navigate('AnomalyNotisDetail')}>
           <Block row middle>
             <Icon size={16} name="bag-17" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON}/>
             <Text size={16} style={styles.tabTitle}>{optionRight || 'Fashion'}</Text>
@@ -202,7 +201,7 @@ class Header extends React.Component {
   render() {
     const { back, title, white, transparent, bgColor, iconColor, titleColor, navigation, ...props } = this.props;
     const { routeName } = navigation.state;
-    const noShadow = ['Search', 'Categories', 'Deals', 'AnomalyDetail', 'Profile'].includes(routeName);
+    const noShadow = ['Search', 'Categories', 'Deals', 'AnomalyNotisDetail', 'Profile'].includes(routeName);
     const headerStyles = [
       !noShadow ? styles.shadow : null,
       transparent ? { backgroundColor: 'rgba(0,0,0,0)' } : null,

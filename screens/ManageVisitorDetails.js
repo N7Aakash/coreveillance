@@ -55,12 +55,12 @@ class ManageVisitorDetails extends React.Component {
                 visitor_id:visitor_id,
             })
 
-        }).then((response) => response.text())
+        }).then((response) => response.json())
             .then((responseJson) => {
 
                 console.log(responseJson);
                  if(responseJson === "true"){
-                    // Alert.alert("Visitor Entered Successfully!!");
+                    Alert.alert("Visitor Entered Successfully!!");
                     {  this.props.navigation.navigate("Home")}
                 }else{
                     Alert.alert("Visitor is already present in society!!");

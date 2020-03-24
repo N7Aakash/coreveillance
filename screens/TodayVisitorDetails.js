@@ -61,7 +61,7 @@ class TodayVisitorDetails extends React.Component {
 
     render(){
         let visitor_type;
-        console.log(this.props.navigation.state.params.visitor_type);
+       // console.log(this.props.navigation.state.params.visitor_type);
         if(this.props.navigation.state.params.visitor_type  === '1')
              visitor_type="FREQUENT VISITOR";
         else
@@ -69,8 +69,8 @@ class TodayVisitorDetails extends React.Component {
         return (
             <View style={styles.container}>
                 <Card style={styles.mainCard}>
-                    <Card style={{padding: 10, margin: 10}}>
-                        <Text style={{textAlign:'center'}}>VISITOR DETAILS</Text>
+                    <Card style={{padding: 10, margin: 10, backgroundColor:argonTheme.COLORS.WARNING}}>
+                        <Text style={{textAlign:'center',color:'white'}}>VISITOR DETAILS</Text>
                     </Card>
                     <Card style={{padding: 10, margin: 10}}>
                         <Block style={{justifyContent:'center',paddingLeft:42, paddingVertical:'2%'}}>

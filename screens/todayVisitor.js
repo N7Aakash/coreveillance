@@ -85,8 +85,8 @@ class todayVisitor extends React.Component {
     render() {
         if (this.state.dataSource.length === 0) {
             return (
-                <Card style={{padding: 10, margin: 10,  backgroundColor: argonTheme.COLORS.WARNING}}>
-                    <Text style={{textAlign:'center', color:'white'}}>No Visited have been checked-in today!</Text>
+                <Card style={{padding: 10, marginHorizontal: 15,  backgroundColor: argonTheme.COLORS.WARNING}}>
+                    <Text style={{textAlign:'center', color:'white'}}>No Visitors to Check-out!</Text>
                 </Card>
             )
         }
@@ -99,7 +99,7 @@ class todayVisitor extends React.Component {
             )}
         return(
             <View style={styles.container}>
-                <Card style={{padding: 10, margin: 10,  backgroundColor: argonTheme.COLORS.WARNING}}>
+                <Card style={{padding: 10, marginHorizontal: 15,  backgroundColor: argonTheme.COLORS.WARNING}}>
                     <Text style={{textAlign:'center',color:'white'}}>Today Visitors</Text>
                 </Card>
                 <FlatList
@@ -109,7 +109,7 @@ class todayVisitor extends React.Component {
                     renderItem={({item}) => this.renderItem(item)}
                     keyExtractor= {item=>item.email_id+""}
                 />
-                <Text>HI</Text>
+
             </View>
         )}}
 

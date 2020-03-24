@@ -12,7 +12,11 @@ import {Block,Button} from "galio-framework";
 import {argonTheme} from "../constants";
 import Constants from "../constants/Constants";
 const { width, height } = Dimensions.get("screen");
+import Input from '../components/Input';
+import {MaterialCommunityIcons} from "@expo/vector-icons";
+
 class VisitorHistory extends React.Component {
+    arrayholder = [];
     constructor(props) {
         super(props);
         this.state = {
@@ -44,6 +48,7 @@ class VisitorHistory extends React.Component {
                         loading: false,
                         dataSource: responseJson
                     })
+                    this.arrayholder=responseJson;
                 }
 
 
@@ -51,6 +56,35 @@ class VisitorHistory extends React.Component {
             console.error(error);
         });
     }
+    searchFilterFunction(text){
+        // console.log(text);
+        const newData = this.arrayholder.filter(item => {
+            const itemData = `${item.visitor_visiting_flat.toUpperCase()}   
+    ${item.visitor_visiting_wing.toUpperCase()} ${item.check_in.toUpperCase()} ${item.check_out.toUpperCase()}`;
+
+            const textData = text.toUpperCase();
+
+            return itemData.indexOf(textData) > -1;
+        });
+        this.setState({ dataSource: newData });
+    }
+    renderSearch = () => {
+        const { navigation } = this.props;
+        return (
+            <Input
+                right
+                color="black"
+                style={styles.search}
+                placeholder="What are you looking for?"
+                placeholderTextColor={'#8898AA'}
+                onChangeText={text => this.searchFilterFunction(text)}
+                // onFocus={() => navigation.navigate('Home')}
+                // iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
+                iconContent={<MaterialCommunityIcons  name="database-search" size={20}  color={argonTheme.COLORS.WARNING} />}
+            />
+        );
+    }
+
 
     FlatListItemSeparator = () => {
         return (
@@ -93,7 +127,7 @@ class VisitorHistory extends React.Component {
     render() {
         if (this.state.dataSource.length === 0) {
             return (
-                <Card style={{padding: 10, margin: 10, backgroundColor: argonTheme.COLORS.WARNING}}>
+                <Card style={{padding: 10, marginHorizontal: 15,marginVertical: 10, backgroundColor: argonTheme.COLORS.WARNING}}>
                     <Text style={{textAlign: 'center', color: 'white'}}>No Visitor History!</Text>
                 </Card>
             )
@@ -107,10 +141,11 @@ class VisitorHistory extends React.Component {
             }
             return (
                 <View style={styles.container}>
-                    <Card style={{padding: 10, margin: 10, backgroundColor: argonTheme.COLORS.WARNING}}>
+                    {this.renderSearch()}
+                    <Card style={{padding: 10, marginVertical: 10,marginHorizontal:15, backgroundColor: argonTheme.COLORS.WARNING}}>
                         <Text style={{textAlign: 'center', color: 'white'}}>Visitor History</Text>
                     </Card>
-                    <Card style={{padding: 10, margin: 10}}>
+                    <Card style={{padding: 10, marginVertical: 10,marginHorizontal:15}}>
                         <Block style={{
                             flexDirection: 'row',
                             justifyContent: 'space-around',
@@ -162,7 +197,15 @@ const styles = StyleSheet.create({
         width: 140,
         height: 50,
         marginTop: 15,
-    }
+    },
+    search: {
+        height: 48,
+        width: width - 32,
+        marginHorizontal: 16,
+        borderWidth: 1,
+        borderRadius: 3,
+        borderColor: argonTheme.COLORS.BORDER
+    },
 });
 
 export default VisitorHistory;

@@ -5,13 +5,18 @@ import {
     ActivityIndicator,
     FlatList,
     Text,
-    TouchableOpacity, Image, TouchableWithoutFeedback,
+    TouchableOpacity, Image, TouchableWithoutFeedback,Dimensions
 } from "react-native";
-import { Block, theme } from 'galio-framework';
+import  { Block, theme } from 'galio-framework';
+
+import Input from '../components/Input';
+const { height, width } = Dimensions.get('window');
 import {Card} from 'react-native-shadow-cards';
 import Constants from "../constants/Constants";
 import {argonTheme} from "../constants";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
 class todayVisitor extends React.Component {
+    arrayholder = [];
     constructor(props) {
         super(props);
         this.state = {
@@ -35,6 +40,7 @@ class todayVisitor extends React.Component {
                         loading: false,
                         dataSource: responseJson
                     });
+                    this.arrayholder=responseJson;
                 }
 
 
@@ -42,6 +48,35 @@ class todayVisitor extends React.Component {
             console.error(error);
         });
     }
+    searchFilterFunction(text){
+        // console.log(text);
+        const newData = this.arrayholder.filter(item => {
+            const itemData = `${item.f_name.toUpperCase()}   
+    ${item.l_name.toUpperCase()} ${item.phone_no.toUpperCase()} ${item.email_id.toUpperCase()}`;
+
+            const textData = text.toUpperCase();
+
+            return itemData.indexOf(textData) > -1;
+        });
+        this.setState({ dataSource: newData });
+    }
+    renderSearch = () => {
+        const { navigation } = this.props;
+        return (
+            <Input
+                right
+                color="black"
+                style={styles.search}
+                placeholder="What are you looking for?"
+                placeholderTextColor={'#8898AA'}
+                onChangeText={text => this.searchFilterFunction(text)}
+                // onFocus={() => navigation.navigate('Home')}
+                // iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
+                iconContent={<MaterialCommunityIcons  name="database-search" size={20}  color={argonTheme.COLORS.WARNING} />}
+            />
+        );
+    }
+
     FlatListItemSeparator = () => {
         return (
             <View style={{
@@ -56,7 +91,7 @@ class todayVisitor extends React.Component {
     renderItem(item){
         console.log(item);
         return(
-            <Card style={{padding: 10, margin: 10}}>
+            <Card style={{padding: 10, marginVertical: 10,marginHorizontal:15}}>
                 <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate("TodayVisitorDetails",{
                     visitor_id:item.visitor_id,
                     name:item.f_name + " " + item.l_name,
@@ -85,7 +120,7 @@ class todayVisitor extends React.Component {
     render() {
         if (this.state.dataSource.length === 0) {
             return (
-                <Card style={{padding: 10, marginHorizontal: 15,  backgroundColor: argonTheme.COLORS.WARNING}}>
+                <Card style={{padding: 10, marginHorizontal: 15,marginVertical:10,  backgroundColor: argonTheme.COLORS.WARNING}}>
                     <Text style={{textAlign:'center', color:'white'}}>No Visitors to Check-out!</Text>
                 </Card>
             )
@@ -99,7 +134,8 @@ class todayVisitor extends React.Component {
             )}
         return(
             <View style={styles.container}>
-                <Card style={{padding: 10, marginHorizontal: 15,  backgroundColor: argonTheme.COLORS.WARNING}}>
+                {this.renderSearch()}
+                <Card style={{padding: 10, marginHorizontal: 15,marginVertical:10, backgroundColor: argonTheme.COLORS.WARNING}}>
                     <Text style={{textAlign:'center',color:'white'}}>Today Visitors</Text>
                 </Card>
                 <FlatList
@@ -129,6 +165,14 @@ const styles = StyleSheet.create({
         position: 'relative',
         borderRadius:20,
 
+    },
+    search: {
+        height: 48,
+        width: width - 32,
+        marginHorizontal: 16,
+        borderWidth: 1,
+        borderRadius: 3,
+        borderColor: argonTheme.COLORS.BORDER
     },
 });
 export default todayVisitor;

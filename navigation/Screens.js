@@ -155,65 +155,47 @@ const HomeStack = createStackNavigator(
       },
       Visitor: {
           screen: Visitor,
-          navigationOptions: ({ navigation }) => ({
-              header: (
-                  <Header left={<Block />} white transparent title="" navigation={navigation} />
-              ),
-              headerTransparent: true
+          navigationOptions: ({navigation}) => ({
+              header: <Header search options title="Visitors" navigation={navigation}/>
           })
       },
       VisitorDetails: {
           screen: VisitorDetails,
-          navigationOptions: ({ navigation }) => ({
-              header: (
-                  <Header left={<Block />} white transparent title="" navigation={navigation} />
-              ),
-              headerTransparent: true
+          navigationOptions: ({navigation}) => ({
+              header: <Header search options title="Visitor Details" navigation={navigation}/>
           })
       },
       VisitorHistory: {
           screen: VisitorHistory,
-          navigationOptions: ({ navigation }) => ({
-              header: (
-                  <Header left={<Block />} white transparent title="" navigation={navigation} />
-              ),
-              headerTransparent: true
+          navigationOptions: ({navigation}) => ({
+              header: <Header search options title="Visitor History" navigation={navigation}/>
           })
       },
       ManageVisitorDetails: {
         screen: ManageVisitorDetails,
-        navigationOptions: ({ navigation }) => ({
-            header: (
-                <Header left={<Block />} white transparent title="" navigation={navigation} />
-            ),
-            headerTransparent: true
-        })
+          navigationOptions: ({navigation}) => ({
+              header: <Header search options title="Manage Visitor Details" navigation={navigation}/>
+          })
     },
       todayVisitor: {
           screen: todayVisitor,
           navigationOptions: ({ navigation }) => ({
-              header: (
-                  <Header left={<Block />} white transparent title="" navigation={navigation} />
+              header: (<Header search options title="Today Visitors" navigation={navigation}/>
               ),
-              headerTransparent: true
           })
       },
       TodayVisitorDetails: {
         screen: TodayVisitorDetails,
-        navigationOptions: ({ navigation }) => ({
-            header: (
-                <Header left={<Block />} white transparent title="" navigation={navigation} />
-            ),
-            headerTransparent: true
-        })
+          navigationOptions: ({ navigation }) => ({
+              header: (<Header search options title="Today Visitor Details" navigation={navigation}/>
+              ),
+          })
     },
       ManageVisitors: {
           screen: ManageVisitors,
           navigationOptions: ({ navigation }) => ({
-              header: (
-                  <Header left={<Block />} white transparent title="" navigation={navigation} />
+                  header: (<Header search options title="Manage Visitors" navigation={navigation}/>
               ),
-              headerTransparent: true
           })
       },
 
@@ -242,16 +224,7 @@ const RegisterVisitorStack = createStackNavigator(
                 ),
                 headerTransparent: true
             })
-        },
-        Visitor: {
-            screen: Visitor,
-            navigationOptions: ({ navigation }) => ({
-                header: (
-                    <Header left={<Block />} white transparent title="" navigation={navigation} />
-                ),
-                headerTransparent: true
-            })
-        },
+        }
 
     },
     {
@@ -275,12 +248,12 @@ const AnomalyStack = createStackNavigator(
           header: <Header search options title="Anomaly Alert" navigation={navigation}/>
         })
       },
-        AnomalyNotisDetail: {
-            screen: AnomalyNotisDetail,
-            navigationOptions: ({ navigation }) => ({
-                headerTransparent: true
-            })
-        },
+        // AnomalyNotisDetail: {
+        //     screen: AnomalyNotisDetail,
+        //     navigationOptions: ({ navigation }) => ({
+        //         headerTransparent: true
+        //     })
+        // },
         Anomalies: {
             screen: Anomalies,
             navigationOptions: ({navigation}) => ({
@@ -289,11 +262,8 @@ const AnomalyStack = createStackNavigator(
         },
         AnomalyDetail: {
             screen: AnomalyDetail,
-            navigationOptions: ({ navigation }) => ({
-                header: (
-                    <Header left={<Block />} white transparent title="" navigation={navigation} />
-                ),
-                headerTransparent: true
+            navigationOptions: ({navigation}) => ({
+                header: <Header search options title="Anomaly Images" navigation={navigation}/>
             })
         },
 
@@ -350,7 +320,14 @@ const LogoutStack = createStackNavigator(
 // d
 const AppStack = createDrawerNavigator(
   {
-
+      Home: {
+          screen: HomeStack,
+          navigationOptions: navOpt => ({
+              drawerLabel: ({ focused }) => (
+                  <DrawerItem focused={focused} title="Home" />
+              )
+          })
+      },
         Onboarding: {
       screen: Onboarding,
       navigationOptions: {
@@ -372,14 +349,7 @@ const AppStack = createDrawerNavigator(
         )
       })
     },
-      Home: {
-          screen: HomeStack,
-          navigationOptions: navOpt => ({
-              drawerLabel: ({ focused }) => (
-                  <DrawerItem focused={focused} title="Home" />
-              )
-          })
-      },
+
       Profile: {
           screen: ProfileStack,
           navigationOptions: navOpt => ({

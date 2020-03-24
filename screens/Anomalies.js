@@ -5,14 +5,18 @@ import {
     ActivityIndicator,
     FlatList,
     Text,
-    TouchableOpacity, ScrollView, TouchableWithoutFeedback, Image
+    TouchableOpacity, ScrollView, TouchableWithoutFeedback, Image, Dimensions
 } from "react-native";
 import {Card} from "react-native-shadow-cards";
+import Input from '../components/Input';
+const { height, width } = Dimensions.get('window');
 import {argonTheme} from "../constants";
 import Constants from "../constants/Constants";
 import {Block} from "galio-framework";
 import {Button} from "../components";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
 class Anomalies extends React.Component {
+    arrayholder = [];
     constructor(props) {
         super(props);
         this.state = {
@@ -32,10 +36,39 @@ class Anomalies extends React.Component {
                         dataSource: responseJson
                     })
                 }
+                this.arrayholder=responseJson;
                 //console.log(responseJson);
             })
             .catch(error => console.log(error)) //to catch the errors if any
 
+    }
+    searchFilterFunction(text){
+        // console.log(text);
+        const newData = this.arrayholder.filter(item => {
+            const itemData = `${item.anomaly_title.toUpperCase()}   
+    ${item.anomaly_type.toUpperCase()} ${item.anomaly_date.toUpperCase()} ${item.anomaly_range.toUpperCase()}`;
+
+            const textData = text.toUpperCase();
+
+            return itemData.indexOf(textData) > -1;
+        });
+        this.setState({ dataSource: newData });
+    }
+    renderSearch = () => {
+        const { navigation } = this.props;
+        return (
+            <Input
+                right
+                color="black"
+                style={styles.search}
+                placeholder="What are you looking for?"
+                placeholderTextColor={'#8898AA'}
+                onChangeText={text => this.searchFilterFunction(text)}
+                // onFocus={() => navigation.navigate('Home')}
+                // iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
+                iconContent={<MaterialCommunityIcons  name="database-search" size={20}  color={argonTheme.COLORS.WARNING} />}
+            />
+        );
     }
 
 
@@ -94,6 +127,7 @@ class Anomalies extends React.Component {
             )}
         return(
             <View style={styles.container}>
+                {this.renderSearch()}
                 <Card style={{padding: 10, margin: 10,  backgroundColor: argonTheme.COLORS.WARNING}}>
                     <Text style={{textAlign:'center',color:'white'}}>All Anomalies</Text>
                 </Card>

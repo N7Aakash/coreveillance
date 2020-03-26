@@ -18,7 +18,7 @@ import Elements from "../screens/Elements";
 import Articles from "../screens/Articles";
 import RegisterVisitor from "../screens/RegisterVisitor";
 import Visitor from "../screens/Visitor";
-import AnomalyStatistics from "../screens/AnomalyStatistics";
+import Statistics from "../screens/Statistics";
 import VisitorDetails from "../screens/VisitorDetails";
 import todayVisitor from "../screens/todayVisitor";
 import ManageVisitors from "../screens/ManageVisitors";
@@ -29,7 +29,8 @@ import VisitorHistory from "../screens/VisitorHistory";
 import Logout from "../screens/Logout";
 import Anomalies from "../screens/Anomalies";
 import AnomalyDetail from "../screens/AnomalyDetail";
-import TestAsync from "../screens/TestAsync";
+import AnomaliesStats from "../screens/AnomaliesStats";
+import VisitorsStats from "../screens/VisitorsStats";
 
 // drawer
 import Menu from "./Menu";
@@ -131,7 +132,6 @@ const ProfileStack = createStackNavigator(
 
 const HomeStack = createStackNavigator(
   {
-
     Home: {
       screen: Home,
       navigationOptions: ({ navigation }) => ({
@@ -147,10 +147,7 @@ const HomeStack = createStackNavigator(
       RegisterVisitor: {
           screen: RegisterVisitor,
           navigationOptions: ({ navigation }) => ({
-              header: (
-                  <Header left={<Block />} white transparent title="" navigation={navigation} />
-              ),
-              headerTransparent: true
+              header: <Header search options title="Register Visitor" navigation={navigation} />
           })
       },
       Visitor: {
@@ -198,6 +195,19 @@ const HomeStack = createStackNavigator(
               ),
           })
       },
+      Anomalies: {
+          screen: Anomalies,
+          navigationOptions: ({navigation}) => ({
+              header: <Header search options title="Anomalies" navigation={navigation}/>
+          })
+      },
+      AnomalyDetail: {
+          screen: AnomalyDetail,
+          navigationOptions: ({navigation}) => ({
+              header: <Header search options title="Anomaly Images" navigation={navigation}/>
+          })
+      },
+
 
   },
   {
@@ -236,34 +246,39 @@ const RegisterVisitorStack = createStackNavigator(
 );
 const AnomalyStack = createStackNavigator(
     {
-        AnomalyStatistics: {
-            screen: AnomalyStatistics,
-            navigationOptions: ({navigation}) => ({
-                header: <Header search options title="Anomaly Statistics" navigation={navigation}/>
-            })
-        },
       AnomalyNotis: {
         screen: AnomalyNotis,
         navigationOptions: ({navigation}) => ({
           header: <Header search options title="Anomaly Alert" navigation={navigation}/>
         })
       },
-        // AnomalyNotisDetail: {
-        //     screen: AnomalyNotisDetail,
-        //     navigationOptions: ({ navigation }) => ({
-        //         headerTransparent: true
-        //     })
-        // },
-        Anomalies: {
-            screen: Anomalies,
-            navigationOptions: ({navigation}) => ({
-                header: <Header search options title="Anomalies" navigation={navigation}/>
+        AnomalyNotisDetail: {
+            screen: AnomalyNotisDetail,
+            navigationOptions: ({ navigation }) => ({
+                headerTransparent: true
             })
         },
-        AnomalyDetail: {
-            screen: AnomalyDetail,
+
+    }
+);
+const StatisticsStack = createStackNavigator(
+    {
+        Statistics: {
+            screen: Statistics,
             navigationOptions: ({navigation}) => ({
-                header: <Header search options title="Anomaly Images" navigation={navigation}/>
+                header: <Header search options title="Statistics" navigation={navigation}/>
+            })
+        },
+        VisitorsStats: {
+            screen: VisitorsStats,
+            navigationOptions: ({navigation}) => ({
+                header: <Header search options title="Visitors Stats" navigation={navigation}/>
+            })
+        },
+        AnomaliesStats: {
+            screen: AnomaliesStats,
+            navigationOptions: ({navigation}) => ({
+                header: <Header search options title="Anomalies Stats" navigation={navigation}/>
             })
         },
 
@@ -299,7 +314,7 @@ const AccountStack = createStackNavigator(
 
 const LogoutStack = createStackNavigator(
     {
-        Login: {
+        Logout: {
             screen: Logout,
             navigationOptions: ({ navigation }) => ({
                 header: (
@@ -320,15 +335,7 @@ const LogoutStack = createStackNavigator(
 // d
 const AppStack = createDrawerNavigator(
   {
-      Home: {
-          screen: HomeStack,
-          navigationOptions: navOpt => ({
-              drawerLabel: ({ focused }) => (
-                  <DrawerItem focused={focused} title="Home" />
-              )
-          })
-      },
-        Onboarding: {
+      Onboarding: {
       screen: Onboarding,
       navigationOptions: {
         drawerLabel: () => {}
@@ -340,16 +347,14 @@ const AppStack = createDrawerNavigator(
               drawerLabel: () => {}
           }
       },
-
-        Logout: {
-      screen: LogoutStack,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-            <DrawerItem focused={focused} screen="Logout" title="Logout" />
-        )
-      })
-    },
-
+      Home: {
+          screen: HomeStack,
+          navigationOptions: navOpt => ({
+              drawerLabel: ({ focused }) => (
+                  <DrawerItem focused={focused} title="Home" />
+              )
+          })
+      },
       Profile: {
           screen: ProfileStack,
           navigationOptions: navOpt => ({
@@ -375,11 +380,20 @@ const AppStack = createDrawerNavigator(
         )
       })
     },
-      AnomalyStack: {
-          screen: AnomalyStack,
+      StatisticsStack: {
+          screen: StatisticsStack,
           navigationOptions: navOpt => ({
               drawerLabel: ({ focused }) => (
-                  <DrawerItem focused={focused} screen="AnomalyStatistics" title="Anomaly Statistics" />
+                  <DrawerItem focused={focused} screen="StatisticsStack" title="Statistics"  />
+              )
+          })
+      },
+
+      Logout: {
+          screen: LogoutStack,
+          navigationOptions: navOpt => ({
+              drawerLabel: ({ focused }) => (
+                  <DrawerItem focused={focused} screen="Logout" title="Logout" />
               )
           })
       },

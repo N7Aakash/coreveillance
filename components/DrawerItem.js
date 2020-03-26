@@ -21,7 +21,7 @@ class DrawerItem extends React.Component {
             color={focused ? "white" : argonTheme.COLORS.PRIMARY}
           />
         );
-      case "Anomaly Statistics":
+      case "Statistics":
         return (
             <MaterialCommunityIcons  name="chart-donut-variant" size={20}  color={focused ? "white" : argonTheme.COLORS.SUCCESS} />
 

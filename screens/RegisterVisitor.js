@@ -19,11 +19,9 @@ import { Block, Checkbox, theme,Text } from "galio-framework";
 import { Button, Icon, Input } from "../components";
 import { Images, argonTheme } from "../constants";
 
-import registerForPushNotificationsAsync from "./registerForPushNotificationsAsync.js";
 import { FontAwesome, MaterialIcons,MaterialCommunityIcons } from '@expo/vector-icons';
-import * as Permissions from "expo-permissions";
-import {Notifications} from "expo";
 import Constants from "../constants/Constants";
+import {Card} from "react-native-shadow-cards";
 const { width, height } = Dimensions.get("screen");
 
 class RegisterVisitor extends React.Component {
@@ -59,7 +57,7 @@ class RegisterVisitor extends React.Component {
                 l_name: this.state.l_name,
                 email_id:this.state.email_id,
                 phone_no:this.state.phone_no,
-                 image:this.state.captured_image,
+                image:this.state.captured_image,
                 visitor_type:this.state.visitor_type,
 
             })
@@ -100,196 +98,109 @@ class RegisterVisitor extends React.Component {
             return <Text>No access to camera</Text>;
         } else {
             return (
-                <Block flex middle>
-                    <StatusBar hidden/>
-                    <ImageBackground
-                        source={Images.RegisterBackground}
-                        style={{width, height, zIndex: 1}}
-                    >
+                <ScrollView>
+                <KeyboardAvoidingView
+                    style={{flex: 1}}
+                    behavior="padding"
+                    enabled
+                >
+                <View style={styles.container}>
+                    <Card style={{padding: 10, marginHorizontal: 15,marginVertical:10,  backgroundColor: argonTheme.COLORS.WARNING, height:'auto'}}>
+                        <Text style={{textAlign:'center',color:'white'}}>Enter Visitor Details</Text>
+                    </Card>
+                    <Card style={{padding: 10, marginHorizontal: 15, marginVertical: 10, paddingVertical:'4%', height:'auto'}}>
+                        <Block style={{ paddingHorizontal: theme.SIZES.BASE , justifyContent:'space-between', height:'auto' }}>
+                            <Input
+                                right
+                                placeholder="First Name"
+                                style={{
+                                    borderColor: argonTheme.COLORS.WARNING,
+                                    borderRadius: 4,
+                                    backgroundColor: "#fff",
+                                    marginVertical:5,
+                                }}
+                                onChangeText={f_name => this.setState({f_name: f_name})}
+                                iconContent={<MaterialIcons name="person" size={15}  color={argonTheme.COLORS.ICON}/>}
+                            />
+                            <Input
+                                right
+                                placeholder="Last Name"
+                                style={{
+                                    borderColor: argonTheme.COLORS.WARNING,
+                                    borderRadius: 4,
+                                    backgroundColor: "#fff",
+                                    marginVertical:5,
+                                }}
+                                onChangeText={l_name => this.setState({l_name: l_name})}
+                                iconContent={ <MaterialIcons name="person-add" size={15}  color={argonTheme.COLORS.ICON} />
+                                }
+                            />
+                            <Input
+                                right
+                                placeholder="Email Id"
+                                style={{
+                                    borderColor: argonTheme.COLORS.WARNING,
+                                    borderRadius: 4,
+                                    backgroundColor: "#fff",
+                                    marginVertical:5,
+                                }}
+                                onChangeText={email_id => this.setState({email_id: email_id})}
+                                iconContent={ <MaterialIcons name="email" size={15}  color={argonTheme.COLORS.ICON} />}
+                            />
+                            <Input
+                                right
+                                placeholder="Phone Number"
+                                style={{
+                                    borderColor: argonTheme.COLORS.WARNING,
+                                    borderRadius: 4,
+                                    backgroundColor: "#fff",
+                                    marginVertical:5,
+                                }}
+                                onChangeText={phone_no => this.setState({phone_no: phone_no})}
+                                iconContent={ <MaterialIcons name="contact-phone" size={15}  color={argonTheme.COLORS.ICON} />}
+                            />
+                            <Picker
+                                selectedValue={this.state.visitor_type}
+                                mode={'dropdown'}
+                                style={{height: 50, width: 'auto',marginVertical:5,}}
+                                onValueChange={(itemValue, itemIndex) =>
+                                    this.tapVisitorChange(itemValue)
+                                }>
+                                <Picker.Item label="NEW VISITOR" value="1" />
+                                <Picker.Item label="FREQUENT VISITOR" value="2" />
 
-                        <Block flex middle>
-                            <Block style={styles.registerContainer}>
-                                <ScrollView>
-
-                                    <Block flex={0.25} middle style={styles.socialConnect}>
-                                        <Text color="#8898AA" size={12} style={{marginTop: theme.SIZES.BASE}}>
-                                            Sign up with
-                                        </Text>
-                                        <Block row
-                                               style={{marginTop: theme.SIZES.BASE, marginBottom: theme.SIZES.BASE}}>
-
-                                            <Button style={{...styles.socialButtons, marginRight: 30}}>
-                                                <Block middle row>
-                                                    <Image source={Images.github}/>
-                                                </Block>
-                                            </Button>
-                                            <Button style={styles.socialButtons}>
-                                                <Block row middle>
-                                                    <Image source={Images.google}/>
-
-                                                </Block>
-                                            </Button>
-                                        </Block>
+                            </Picker>
+                                <Image source={{uri: `data:image;base64,${this.state.captured_image}`}}  style={styles.logo}/>
+                            <Block middle>
+                                <Button color="white" style={styles.createButton}
+                                        onPress={this.registerUser}>
+                                    <Block middle>
+                                        <Image source={Images.create}/>
                                     </Block>
-
-                                    <Block flex>
-
-                                        <Block flex={0.17} middle>
-                                            <Text color="#8898AA" size={12}
-                                                  style={{marginTop: theme.SIZES.BASE, marginBottom: theme.SIZES.BASE}}>
-                                                Or sign up the classic way
-                                            </Text>
-                                        </Block>
-                                        <Block flex center>
-                                            <KeyboardAvoidingView
-                                                style={{flex: 1}}
-                                                behavior="padding"
-                                                enabled
-                                            >
-                                                <Block width={width * 0.8} style={{marginBottom: 15}}>
-
-                                                    <Input
-                                                        borderless
-                                                        placeholder="   First Name"
-                                                        onChangeText={f_name => this.setState({f_name: f_name})}
-
-                                                        iconContent={
-
-                                                            <FontAwesome style={styles.inputIcons} name="user" size={20} color="red" />
-
-                                                        }
-                                                    />
-                                                </Block>
-                                                <Block width={width * 0.8} style={{marginBottom: 15}}>
-                                                    <Input
-                                                        borderless
-                                                        placeholder=" Last Name"
-                                                        onChangeText={l_name => this.setState({l_name: l_name})}
-                                                        iconContent={
-                                                            <FontAwesome style={styles.inputIcons} name="user-plus" size={19} color="red" />
-                                                        }
-                                                    />
-                                                </Block>
-                                                <Block width={width * 0.8} style={{marginBottom: 15}}>
-                                                    <Input
-                                                        borderless
-                                                        placeholder="  Email"
-                                                        onChangeText={email_id => this.setState({email_id: email_id})}
-                                                        iconContent={
-                                                            <MaterialCommunityIcons style={styles.inputIcons} name="email" size={20} color="red" />
-                                                        }
-                                                    />
-                                                </Block>
-                                                <Block width={width * 0.8} style={{marginBottom: 15}}>
-                                                    <Input
-                                                        borderless
-                                                        placeholder="   Phone Number"
-                                                        onChangeText={phone_no => this.setState({phone_no: phone_no})}
-                                                        iconContent={
-                                                            <FontAwesome style={styles.inputIcons} name="address-book" size={19} color="red" />
-                                                        }
-                                                    />
-                                                </Block>
-                                                <Block width={width * 0.8} style={{marginBottom: 15}}>
-                                                <Picker
-                                                    selectedValue={this.state.visitor_type}
-                                                    mode={'dropdown'}
-                                                    style={{height: 50, width: 'auto', backgroundColor:'white'}}
-                                                    onValueChange={(itemValue, itemIndex) =>
-                                                       this.tapVisitorChange(itemValue)
-                                                    }>
-                                                    <Picker.Item label="NEW VISITOR" value="1" />
-                                                    <Picker.Item label="FREQUENT VISITOR" value="2" />
-
-                                                </Picker>
-                                                </Block>
-                                                <Block flex style={imgContainer}>
-                                                    <Image source={{uri: `data:image;base64,${this.state.captured_image}`}} style={styles.logo}/>
-                                                </Block>
-
-
-
-                                                <Block middle>
-                                                    <Button color="white" style={styles.createButton}
-                                                            onPress={this.registerUser}>
-                                                        <Block middle>
-                                                            <Image source={Images.create}/>
-                                                        </Block>
-                                                    </Button>
-                                                </Block>
-                                            </KeyboardAvoidingView>
-
-                                        </Block>
-                                    </Block>
-                                </ScrollView>
+                                </Button>
                             </Block>
-
                         </Block>
+                    </Card>
+                </View>
 
-                    </ImageBackground>
-
-
-                </Block>
+                </KeyboardAvoidingView>
+                </ScrollView>
             );
         }
     }
 }
 
 const styles = StyleSheet.create({
-    registerContainer: {
-        width: width * 0.9,
-        height: height * 0.78,
-        backgroundColor: 'rgba(52, 52, 52, 0.8)',
-        borderRadius: 4,
-        shadowColor: argonTheme.COLORS.BLACK,
-        shadowOffset: {
-            width: 0,
-            height: 4
-        },
-        shadowRadius: 8,
-        shadowOpacity: 0.1,
-        elevation: 1,
-        overflow: "hidden"
-    },
-    socialConnect: {
-        backgroundColor: 'rgba(52, 52, 52, 0.8)',
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: "#8898AA"
-    },
-    socialButtons: {
-        width: 120,
-        height: 40,
-        backgroundColor: "#fff",
-        shadowColor: argonTheme.COLORS.BLACK,
-        shadowOffset: {
-            width: 0,
-            height: 4
-        },
-        shadowRadius: 8,
-        shadowOpacity: 0.1,
-        elevation: 1
-    },
-    createText:{
-        marginLeft: 20,
-    },
-    socialTextButtons: {
-        color: argonTheme.COLORS.PRIMARY,
-        fontWeight: "800",
-        fontSize: 14
-    },
-    inputIcons: {
-        marginRight: 12
-    },
-    passwordCheck: {
-        paddingLeft: 15,
-        paddingTop: 13,
-        paddingBottom: 30
+    container: {
+        flex: 1,
+        height:'auto'
     },
     createButton: {
         width: width * 0.25,
         height: height * 0.07,
         marginTop: 25,
-        marginBottom:theme.SIZES.BASE
+        marginBottom:theme.SIZES.BASE,
+        marginVertical:5
     },
     logo: {
         width: 'auto',
@@ -297,12 +208,8 @@ const styles = StyleSheet.create({
         position: 'relative',
 
     },
-    imageContainer: {
-        borderRadius: 3,
-        elevation: 1,
-        overflow: 'hidden',
 
-    },
+
 });
 
 export default RegisterVisitor;

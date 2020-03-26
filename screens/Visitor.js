@@ -124,7 +124,7 @@ class Visitor extends React.Component {
                         <Text style={styles.item}>{data.item.phone_no}</Text>
                         <Button
                             small
-                            style={{backgroundColor: argonTheme.COLORS.WARNING, height: 50, width: 150}}
+                            style={{backgroundColor: argonTheme.COLORS.WARNING, height: 50, width: 175, marginVertical:5}}
                         >
                             <Text style={{color: 'white'}}> {this.printVisitorType(data.item.visitor_type_id)}</Text>
                         </Button>

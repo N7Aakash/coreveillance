@@ -5,11 +5,12 @@ import {
     ScrollView,
     Image,
     ImageBackground,
-    Platform
+    Platform, View
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
 import { Button } from "../components";
+import {Card} from 'react-native-shadow-cards';
 import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
 
@@ -29,64 +30,108 @@ class AboutUs extends React.Component {
                 <Block flex>
                         <ScrollView
                             showsVerticalScrollIndicator={false}
-                            style={{ width, marginTop: '25%' }}
+                            style={{ width, marginTop: '15%' }}
                         >
                             <Block flex style={styles.profileCard}>
-                                {/*<Block middle style={styles.avatarContainer}>*/}
-                                {/*    <Image*/}
-                                {/*        source={{ uri: Images.ProfilePicture }}*/}
-                                {/*        style={styles.avatar}*/}
-                                {/*    />*/}
-                                {/*</Block>*/}
                                 <Block style={styles.info}>
-                                    <Block row space="between">
-                                        <Block middle>
-                                            <Text
-                                                bold
-                                                size={12}
-                                                color="#525F7F"
-                                                style={{ marginBottom: 4 }}
-                                            >
-                                                2K
-                                            </Text>
-                                            <Text size={12}>Orders</Text>
-                                        </Block>
-                                        <Block middle>
-                                            <Text
-                                                bold
-                                                color="#525F7F"
-                                                size={12}
-                                                style={{ marginBottom: 4 }}
-                                            >
-                                                10
-                                            </Text>
-                                            <Text size={12}>Photos</Text>
-                                        </Block>
-                                        <Block middle>
-                                            <Text
-                                                bold
-                                                color="#525F7F"
-                                                size={12}
-                                                style={{ marginBottom: 4 }}
-                                            >
-                                                89
-                                            </Text>
-                                            <Text size={12}>Comments</Text>
-                                        </Block>
+                                    <Block>
+                                        <Image source={{uri: `data:image;base64,${Images.logoData}`}} style={styles.logo} />
+                                        <Image source={{uri: `data:image;base64,${Images.lineData}`}} style={styles.catchLine} />
                                     </Block>
+
                                 </Block>
                                 <Block flex>
-                                    <Block middle style={styles.nameInfo}>
-                                        <Text bold size={28} color="#32325D">
-                                            Jessica Jones, 27
-                                        </Text>
-                                        <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
-                                            San Francisco, USA
-                                        </Text>
+                                    <Block
+                                        middle
+                                        row
+                                        space="evenly"
+                                        style={{ marginVertical: '5%' }}
+                                    >
+                                        <Button
+                                            small
+                                            style={{ backgroundColor: argonTheme.COLORS.WARNING, height:50, width:'auto', }}
+                                        >
+                                            <Text style={{color:'white'}}> DEVELOPMENT TEAM </Text>
+                                        </Button>
+
                                     </Block>
-                                    <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
-                                        <Block style={styles.divider} />
+                                    <Block style={styles.devTeam}>
+                                    <Block style={styles.avatarContainer}>
+                                        <Card style={{padding:10, width:'auto',height:'auto'}}>
+                                            <Image source={{uri: `data:image;base64,${Images.Akash}`}} style={[styles.avatar]} />
+                                        <Block middle style={styles.devTeamInfo}>
+                                        <Text style={{color:argonTheme.COLORS.WARNING}}>Akash Narang</Text><Text style={{color:argonTheme.COLORS.ERROR}}>CMPN D17A 29</Text>
+                                        </Block>
+                                        </Card>
+                                        <Card style={{padding:10, width:'auto',height:'auto'}}>
+                                            <Image source={{uri: `data:image;base64,${Images.Chirag}`}} style={styles.avatar} resizeMode="cover"/>
+                                            <Block middle style={styles.devTeamInfo}>
+                                                <Text style={{color:argonTheme.COLORS.WARNING}}>Chirag Raghani</Text><Text style={{color:argonTheme.COLORS.ERROR}}>CMPN D17B 55</Text>
+                                            </Block>
+                                        </Card>
                                     </Block>
+                                        <View style={{
+                                            height: .5 * 2,
+                                            width:"94%",
+                                            marginLeft:"3%",
+                                            marginTop:'10%',
+                                            marginBottom:'10%',
+                                            backgroundColor:argonTheme.COLORS.WARNING,
+                                        }}
+                                        />
+
+                                        <Block style={[styles.avatarContainer]}>
+                                            <Card style={{padding:10, width:'auto',height:'auto'}}>
+                                                <Image source={{uri: `data:image;base64,${Images.Dhiren}`}} style={[styles.avatar]} />
+                                                <Block middle style={styles.devTeamInfo}>
+                                                    <Text style={{color:argonTheme.COLORS.WARNING}}>Dhiren Chotwani</Text><Text style={{color:argonTheme.COLORS.ERROR}}>CMPN D17B 11</Text>
+                                                </Block>
+                                            </Card>
+                                            <Card style={{padding:10, width:'auto',height:'auto'}}>
+                                                <Image source={{uri: `data:image;base64,${Images.Piyu}`}} style={styles.avatar} resizeMode="cover"/>
+                                                <Block middle style={styles.devTeamInfo}>
+                                                    <Text style={{color:argonTheme.COLORS.WARNING}}>Piyu Lalchandani</Text><Text style={{color:argonTheme.COLORS.ERROR}}>CMPN D17C 34</Text>
+                                                </Block>
+                                            </Card>
+                                        </Block>
+
+                                        <Block
+                                            middle
+                                            row
+                                            space="evenly"
+                                            style={{ marginTop: '20%' }}
+                                        >
+                                            <Button
+                                                small
+                                                style={{ backgroundColor: argonTheme.COLORS.WARNING, height:50, width:'auto', }}
+                                            >
+                                                <Text style={{color:'white'}}> MENTOR </Text>
+                                            </Button>
+
+                                        </Block>
+<Block style={{flexDirection:'row',alignItems:'center',
+    justifyContent:'space-between', marginHorizontal:'28%',marginTop:'20%'}}>
+
+                                            <Card style={{padding:10, width:'auto',height:'auto'}}>
+                                                <Image source={{uri: `data:image;base64,${Images.LifnaMaam}`}} style={[styles.avatar]} />
+                                                <Block middle style={styles.devTeamInfo}>
+                                                    <Text style={{color:argonTheme.COLORS.WARNING}}>Mrs. Lifna C.S</Text><Text style={{color:argonTheme.COLORS.ERROR,fontSize:12}}>Comp. Department </Text>
+                                                    <Text style={{color:argonTheme.COLORS.ERROR, width:'auto',fontSize:12}}>Assistant Professor</Text>
+                                                </Block>
+                                            </Card>
+
+</Block>
+                                </Block>
+                                </Block>
+                                <Block center>
+                                    <Button
+                                        style={styles.button}
+                                        color={argonTheme.COLORS.SECONDARY}
+                                        onPress={() => this.props.navigation.navigate("Home")}
+                                        textStyle={{ color: argonTheme.COLORS.WHITE }}
+                                    >
+                                        Get STARTED!
+                                    </Button>
                                 </Block>
                             </Block>
                         </ScrollView>
@@ -119,27 +164,35 @@ const styles = StyleSheet.create({
         padding: theme.SIZES.BASE,
         marginHorizontal: theme.SIZES.BASE,
         marginTop: 65,
-        borderTopLeftRadius: 6,
-        borderTopRightRadius: 6,
+        borderRadius: 6,
         backgroundColor: theme.COLORS.WHITE,
         shadowColor: "black",
         shadowOffset: { width: 0, height: 0 },
         shadowRadius: 8,
         shadowOpacity: 0.2,
-        zIndex: 2
+        zIndex: 2,
+        height:'auto',
+        marginBottom: 65,
     },
     info: {
-        paddingHorizontal: 40
+        marginVertical:'10%',
+        alignItems:'center',
+        justifyContent:'space-between',
     },
     avatarContainer: {
         position: "relative",
-        marginTop: -80
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignContent:'center',
+        width:'100%',
+        paddingHorizontal:'2%',
     },
     avatar: {
         width: 124,
         height: 124,
         borderRadius: 62,
-        borderWidth: 0
+        borderWidth: 2,
+        borderColor: argonTheme.COLORS.WARNING,
     },
     nameInfo: {
         marginTop: 35
@@ -155,7 +208,39 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         width: thumbMeasure,
         height: thumbMeasure
-    }
+    },
+    logo: {
+        width: 300,
+        height: 45,
+        zIndex: 2,
+        position: 'relative',
+        paddingVertical:20
+        // marginRig: '-50%'
+    },
+    catchLine:{
+        width: 300,
+        height: 30,
+        zIndex:2,
+        position: 'relative',
+        paddingVertical:20
+    },
+    devTeam:{
+        justifyContent:'space-around',
+        alignContent:'center',
+        paddingVertical:'2%'
+    },
+    devTeamInfo:{
+        justifyContent:'space-around',
+        alignContent:'center',
+        paddingVertical:'2%',
+        marginTop:15,
+    },
+    button: {
+        width: width - theme.SIZES.BASE * 4,
+        height: theme.SIZES.BASE * 3,
+        backgroundColor:argonTheme.COLORS.WARNING,
+
+    },
 });
 
 export default AboutUs;

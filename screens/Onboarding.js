@@ -66,7 +66,7 @@ class Onboarding extends React.Component {
                   onPress={() => navigation.navigate("AboutUs")}
                   textStyle={{ color: argonTheme.COLORS.BLACK }}
                 >
-                  Get STARTED!
+                  About Coreveillance!
                 </Button>
               </Block>
           </Block>

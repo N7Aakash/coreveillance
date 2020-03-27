@@ -32,6 +32,8 @@ import AnomalyDetail from "../screens/AnomalyDetail";
 import AnomaliesStats from "../screens/AnomaliesStats";
 import VisitorsStats from "../screens/VisitorsStats";
 
+import AboutUs from "../screens/AboutUs";
+
 // drawer
 import Menu from "./Menu";
 import DrawerItem from "../components/DrawerItem";
@@ -132,6 +134,12 @@ const ProfileStack = createStackNavigator(
 
 const HomeStack = createStackNavigator(
   {
+      Login: {
+          screen: Login,
+          navigationOptions: ({ navigation }) => ({
+              headerTransparent: true
+          })
+      },
     Home: {
       screen: Home,
       navigationOptions: ({ navigation }) => ({
@@ -286,12 +294,7 @@ const StatisticsStack = createStackNavigator(
 );
 const AccountStack = createStackNavigator(
     {
-      Login: {
-        screen: Login,
-        navigationOptions: ({ navigation }) => ({
-          headerTransparent: true
-        })
-      },
+
 
       Register: {
         screen: Register,
@@ -331,12 +334,35 @@ const LogoutStack = createStackNavigator(
     }
 );
 
+const OnboardingStack = createStackNavigator(
+    {
+        Onboarding: {
+            screen: Onboarding,
+            navigationOptions: ({ navigation }) => ({
+                headerTransparent: true
+            })
+        },
+        AboutUs: {
+            screen: AboutUs,
+            navigationOptions: ({ navigation }) => ({
+                headerTransparent: true
+            })
+        },
+
+
+    },
+    {
+        cardStyle: { backgroundColor: "#FFFFFF" },
+        transitionConfig
+    }
+);
+
 
 // d
 const AppStack = createDrawerNavigator(
   {
-      Onboarding: {
-      screen: Onboarding,
+      OnboardingStack: {
+      screen: OnboardingStack,
       navigationOptions: {
         drawerLabel: () => {}
       }
@@ -397,6 +423,13 @@ const AppStack = createDrawerNavigator(
               )
           })
       },
+      Anomaly:{
+          screen:AnomalyStack,
+          navigationOptions: navOpt => ({
+              drawerLabel: () => {}
+          })
+      },
+
 
   },
   Menu

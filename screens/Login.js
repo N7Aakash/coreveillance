@@ -90,11 +90,13 @@ class Login extends React.Component {
                 }
                 else if(responseJson === "Password did not matched"){
                     Alert.alert("Incorrect Password/Email ID/Flat number", message);
-                } else{
-                    {this.storeData(responseJson)}
-                    {  this.props.navigation.navigate("Home")}
+                } else {
+                    this.storeData(responseJson);
+                    let id = responseJson['user_role_id'];
+                    this.props.navigation.navigate("Home", {
+                            user_role_id:id,
+                        });
                 }
-
 
 
 

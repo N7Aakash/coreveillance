@@ -53,11 +53,11 @@ class Header extends React.Component {
     registerForPushNotificationsAsync();
     Notifications.addListener((notification) => {
       const { data: { text }, origin,route } = notification;
-      console.log("hi");
+      //console.log("hi");
       if (origin === 'received'  ) {
         Alert.alert(
             'AnomalyNotis Detected!!!',
-            'There is a anomaly detected, CHECK NOW!!',
+            'There is an anomaly detected, CHECK NOW!!',
             [
               {
                 text: 'Cancel',
@@ -76,7 +76,8 @@ class Header extends React.Component {
     });
   }
   handler = () => {
-    this.props.navigation.navigate("AnomalyNotis");
+     this.props.navigation.navigate("AnomalyNotis");
+    // console.log("inside handler");
   };
 
   handleLeftPress = () => {

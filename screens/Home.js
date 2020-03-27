@@ -15,21 +15,26 @@ class Home extends React.Component {
             todayVisitors: 0,
             totalVisitors: 0,
             totalAnomalies: 0,
+            user_role_id:this.props.navigation.state.params.user_role_id ,
             getValue: 'DUMMY',
 
         };
-        {
-            this.retrieveData("email")
-        }
+            // {this.retrieveData("user_role_id")}
+        // console.log("Home:" + this.state.user_role_id);
+
+
     }
 
     async retrieveData(key) {
         try {
             const value = await AsyncStorage.getItem(key);
-            if (value !== null) {
-                // We have data!!
-                console.log("Printing at Home: " + value);
-            }
+            // if (value !== null) {
+            //     // We have data!!
+            //     this.setState({
+            //         [key]:value,
+            //     })
+            // }
+            console.log(value);
         } catch (error) {
             // Error retrieving data
         }

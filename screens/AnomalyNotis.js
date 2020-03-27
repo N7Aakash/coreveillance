@@ -30,21 +30,33 @@ class AnomalyNotis extends React.Component {
         }
     }
    async getData(){
-        let response =  fetch(Constants.API_PATH+'image_get.php');
-        let responseJson = await response.json();
-       // console.log(responseJson);
-        console.log("Images : " + JSON.stringify(responseJson));
-        let anomaly_images=this.state.anomaly_images;
-        this.setState({
-            anomaly_images:anomaly_images.concat(responseJson),
-            isLoading:false,
-        });
+        // let response =  fetch(Constants.API_PATH+'image_get.php');
+        // // let responseJson = await response.json();
+        // console.log(response);
+       //  console.log("Images : " + JSON.stringify(responseJson));
+        // let anomaly_images=this.state.anomaly_images;
+        // this.setState({
+        //     anomaly_images:anomaly_images.concat(responseJson),
+        //     isLoading:false,
+        // });
+       fetch(Constants.API_PATH + 'image_get.php')
+           .then(response => response.json())
+           .then((responseJson) => {
+               let anomaly_images=this.state.anomaly_images;
+               this.setState({
+                   anomaly_images: anomaly_images.concat(responseJson),
+                   isLoading: false,
+               })
+
+           })
+           .catch(error => console.log(error)) //to catch the errors if any
+
+   }
 
 
 
-    };
 
-componentWillMount() {
+componentDidMount() {
     this.getData()
 }
 
